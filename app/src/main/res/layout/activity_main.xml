@@ -16,11 +16,15 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
+        <!--Where the normal content is-->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <!--The main floating action button-->
-            <android.support.design.widget.FloatingActionButton  android:id="@+id/button_add"
+            <android.support.design.widget.FloatingActionButton
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/button_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_add_white_48dp"
@@ -29,7 +33,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="48dp"
                 android:layout_marginBottom="32dp"
-                android:layout_gravity="bottom|right" />
+                android:layout_gravity="bottom|right"
+                app:elevation="4dp"
+                app:borderWidth="0dp"/>
         </FrameLayout>
 
         <!-- Navigation view -->
