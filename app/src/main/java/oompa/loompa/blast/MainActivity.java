@@ -1,34 +1,29 @@
 package oompa.loompa.blast;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener {
-    private RecyclerView mNotificationListView;
-    private NotificationListAdapter mNotificationListAdapter;
-    private RecyclerView.LayoutManager mNotificationListLayoutManager;
-
+public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private static final String planets[] = new String[] {"Sun", "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"};
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+
+    private NotificationListFragment notificationListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mNotificationListView = (RecyclerView) findViewById(R.id.notification_list_view);
 
         //Enable ActionBar app icon to behave as action to toggle nav drawer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -52,17 +47,12 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         //Create the drawer listener(listens for events involving the navigation drawer being opened and closed).
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mNotificationListView.setHasFixedSize(true);
+        fragmentManager = getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
 
-        // use a linear layout manager
-        mNotificationListLayoutManager = new LinearLayoutManager(this);
-        mNotificationListView.setLayoutManager(mNotificationListLayoutManager);
-
-        // specify an adapter (see also next example)
-        mNotificationListAdapter = new NotificationListAdapter(new ArrayList<String>(Arrays.asList(planets)));
-        mNotificationListView.setAdapter(mNotificationListAdapter);
+        notificationListFragment = new NotificationListFragment();
+        fragmentTransaction.add(R.id.navigation_layout, notificationListFragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -97,30 +87,11 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onDrawerSlide(View drawerView, float offset) {
-    }
-
-    @Override
-    public void onDrawerOpened(View drawerView) {
-        System.out.println("HI");
-    }
-
-    @Override
-    public void onDrawerClosed(View DrawerView) {
-
-    }
-
-    @Override
-    public void onDrawerStateChanged(int newState) {
-
-    }
-
     //Remove a notification from the notification list view.
     public void removeNotification(View v) {
-        int position = mNotificationListView.getChildAdapterPosition((RelativeLayout) v.getParent().getParent().getParent());
-        mNotificationListAdapter.mDataSet.remove(position);
-        mNotificationListAdapter.notifyItemRemoved(position);
-        mNotificationListAdapter.notifyItemRangeChanged(position, mNotificationListAdapter.mDataSet.size());
+        int position = notificationListFragment.mNotificationListView.getChildAdapterPosition((RelativeLayout) v.getParent().getParent().getParent());
+        notificationListFragment.mNotificationListAdapter.mDataSet.remove(position);
+        notificationListFragment.mNotificationListAdapter.notifyItemRemoved(position);
+        notificationListFragment.mNotificationListAdapter.notifyItemRangeChanged(position, notificationListFragment.mNotificationListAdapter.mDataSet.size());
     }
 }
