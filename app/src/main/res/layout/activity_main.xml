@@ -32,7 +32,7 @@
             <!--The main floating action button-->
             <android.support.design.widget.FloatingActionButton
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/button_add"
+                android:id="@+id/notification_button_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_add_white_48dp"

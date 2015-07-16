@@ -5,14 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.v7.widget.CardView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ethan on 7/15/2015.
  */
 public class NotificationListAdapter extends RecyclerView.Adapter<NotificationListAdapter.ViewHolder> {
-    private String[] mDataSet;
+    public ArrayList<String> mDataSet;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -20,14 +23,14 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView mTextView;
-        public ViewHolder(LinearLayout v) {
+        public ViewHolder(RelativeLayout v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.info_text);
+            mTextView = (TextView) v.findViewById(R.id.firstLine);
         }
     }
 
     //Constructor provides data for the adapter.
-    public NotificationListAdapter(String[] notificationQueue) {
+    public NotificationListAdapter(ArrayList<String> notificationQueue) {
         mDataSet = notificationQueue;
     }
 
@@ -38,7 +41,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.notification_list_item, viewGroup, false);
         // set the view's size, margins, paddings and layout parameters
 
-        ViewHolder vh = new ViewHolder((LinearLayout) v);
+        ViewHolder vh = new ViewHolder((RelativeLayout) v);
         return vh;
     }
 
@@ -47,12 +50,12 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
     public void onBindViewHolder(NotificationListAdapter.ViewHolder viewHolder, int i) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        viewHolder.mTextView.setText(mDataSet[i]);
+        viewHolder.mTextView.setText(mDataSet.get(i));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+        return mDataSet.size();
     }
 }

@@ -2,17 +2,25 @@ package oompa.loompa.blast;
 
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.widget.RecyclerView;
+import android.widget.RelativeLayout;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener {
     private RecyclerView mNotificationListView;
-    private RecyclerView.Adapter mNotificationListAdapter;
+    private NotificationListAdapter mNotificationListAdapter;
     private RecyclerView.LayoutManager mNotificationListLayoutManager;
+
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     private static final String planets[] = new String[] {"Sun", "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"};
 
@@ -22,8 +30,27 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         setContentView(R.layout.activity_main);
         mNotificationListView = (RecyclerView) findViewById(R.id.notification_list_view);
 
+        //Enable ActionBar app icon to behave as action to toggle nav drawer
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.navigation_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
         //Create the drawer listener(listens for events involving the navigation drawer being opened and closed).
-        ((DrawerLayout) this.findViewById(R.id.navigation_layout)).setDrawerListener(this);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -34,10 +61,15 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         mNotificationListView.setLayoutManager(mNotificationListLayoutManager);
 
         // specify an adapter (see also next example)
-        mNotificationListAdapter = new NotificationListAdapter(planets);
+        mNotificationListAdapter = new NotificationListAdapter(new ArrayList<String>(Arrays.asList(planets)));
         mNotificationListView.setAdapter(mNotificationListAdapter);
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,6 +87,10 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        //For the hamburger icon.
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
@@ -78,5 +114,13 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     @Override
     public void onDrawerStateChanged(int newState) {
 
+    }
+
+    //Remove a notification from the notification list view.
+    public void removeNotification(View v) {
+        int position = mNotificationListView.getChildAdapterPosition((RelativeLayout) v.getParent().getParent().getParent());
+        mNotificationListAdapter.mDataSet.remove(position);
+        mNotificationListAdapter.notifyItemRemoved(position);
+        mNotificationListAdapter.notifyItemRangeChanged(position, mNotificationListAdapter.mDataSet.size());
     }
 }
