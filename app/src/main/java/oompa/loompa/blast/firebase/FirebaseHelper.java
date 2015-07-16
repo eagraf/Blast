@@ -11,8 +11,6 @@ import com.firebase.client.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import oompa.loompa.blast.FirebaseMetadata;
-
 /**
  * Created by Da-Jin on 7/14/2015.
  */
@@ -78,9 +76,7 @@ public class FirebaseHelper {
                 }
                 mFirebaseRef.child("users").child(authData.getUid()).setValue(map);
 
-                FirebaseMetadata meta = new FirebaseMetadata(authData.getUid(),true);
-                FirebaseGroup.createGroup("beta",meta).post(new Message("First","lel"));
-            }
+              }
 
             @Override
             public void onAuthenticationError(FirebaseError firebaseError) {
