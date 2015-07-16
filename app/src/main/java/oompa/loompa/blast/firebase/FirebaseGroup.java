@@ -63,6 +63,11 @@ public class FirebaseGroup implements Group{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("Group", "group data snap " + dataSnapshot.getValue());
 
+                Iterable<DataSnapshot> messages = dataSnapshot.getChildren();
+                for(DataSnapshot data:messages){
+                    Message msg = data.getValue(Message.class);
+                    Log.i("Group","subject: "+msg.getSubject()+"\nbody: "+msg.getBody());
+                }
             }
 
             @Override
