@@ -1,17 +1,20 @@
 package oompa.loompa.blast;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ((DrawerLayout) this.findViewById(R.id.navigation_layout)).setDrawerListener(this);
     }
 
 
@@ -35,5 +38,24 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDrawerSlide(View drawerView, float offset) {
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+        System.out.println("HI");
+    }
+
+    @Override
+    public void onDrawerClosed(View DrawerView) {
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+
     }
 }
