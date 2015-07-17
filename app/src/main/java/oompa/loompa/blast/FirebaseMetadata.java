@@ -4,7 +4,7 @@ package oompa.loompa.blast;
  * Created by Da-Jin on 7/15/2015.
  */
 
-public class FirebaseMetadata{
+public class FirebaseMetadata implements Group.Metadata {
     private String ownerUID;
     private boolean isPublic;
 

@@ -7,10 +7,11 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import oompa.loompa.blast.FirebaseMetadata;
 import oompa.loompa.blast.Group;
+import oompa.loompa.blast.GroupListener;
 
 /**
  * Created by Da-Jin on 7/14/2015.
@@ -19,6 +20,7 @@ public class FirebaseGroup implements Group{
     private final Firebase groupMetaRef;
     private final Firebase groupMessageRef;
     private FirebaseMetadata metadata;
+    private GroupListener listener;
 
 
     public static Group createGroup(final String groupName, final FirebaseMetadata meta){
@@ -63,11 +65,14 @@ public class FirebaseGroup implements Group{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("Group", "group data snap " + dataSnapshot.getValue());
 
-                Iterable<DataSnapshot> messages = dataSnapshot.getChildren();
-                for(DataSnapshot data:messages){
-                    Message msg = data.getValue(Message.class);
+                ArrayList<Message> messageList = new ArrayList<Message>();
+                Iterable<DataSnapshot> data = dataSnapshot.getChildren();
+                for(DataSnapshot datum:data){
+                    Message msg = datum.getValue(Message.class);
                     Log.i("Group","subject: "+msg.getSubject()+"\nbody: "+msg.getBody());
+                    messageList.add(msg);
                 }
+                listener.messageChange(messageList);
             }
 
             @Override
@@ -81,6 +86,7 @@ public class FirebaseGroup implements Group{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("Group", "group meta snap " + dataSnapshot.getValue());
                 metadata = dataSnapshot.getValue(FirebaseMetadata.class);
+                listener.metaDataChange(metadata);
             }
 
             @Override
@@ -91,18 +97,8 @@ public class FirebaseGroup implements Group{
     }
 
     @Override
-    public boolean isGroupOwner(String UID) {
-        return metadata.getOwnerUID().equals(UID);
-    }
-
-    @Override
-    public FirebaseMetadata getGroupMetadata() {
-        return metadata;
-    }
-
-    @Override
-    public List<Message> getGroupMessages() {
-        return null;
+    public void registerGroupListener(GroupListener listener) {
+        this.listener = listener;
     }
 
     @Override
