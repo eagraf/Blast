@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         notificationListFragment = new NotificationListFragment();
         groupListFragment = new GroupListFragment();
-        fragmentTransaction.add(R.id.navigation_layout, notificationListFragment);
+        fragmentTransaction.add(R.id.main_content_frame, notificationListFragment);
         fragmentTransaction.commit();
 
 
@@ -83,15 +83,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         System.out.println("HIIIIIIIIIIIIII");
         menuItem.setChecked(true);
+        fragmentTransaction =getFragmentManager().beginTransaction();
         switch (menuItem.getItemId()) {
             //Go to the notification list.
             case R.id.notification_list_item:
-                fragmentTransaction.replace(R.id.navigation_layout, notificationListFragment);
+                fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_content_frame, notificationListFragment);
                 fragmentTransaction.commit();
                 return true;
             //Go to the group list.
             case R.id.group_list_item:
-                fragmentTransaction.replace(R.id.navigation_layout, groupListFragment);
+                fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_content_frame, groupListFragment);
                 fragmentTransaction.commit();
                 return true;
             default:
