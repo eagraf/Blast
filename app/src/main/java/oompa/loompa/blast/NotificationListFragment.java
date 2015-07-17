@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,5 +46,13 @@ public class NotificationListFragment extends Fragment {
         // in content do not change the layout size of the RecyclerView
         mNotificationListView.setHasFixedSize(true);
         return view;
+    }
+
+    //Remove a notification from
+    public void removeNotification(View v) {
+        int position = mNotificationListView.getChildAdapterPosition((RelativeLayout) v.getParent().getParent().getParent());
+        mNotificationListAdapter.mDataSet.remove(position);
+        mNotificationListAdapter.notifyItemRemoved(position);
+        mNotificationListAdapter.notifyItemRangeChanged(position, mNotificationListAdapter.mDataSet.size());
     }
 }

@@ -105,9 +105,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Remove a notification from the notification list view.
     public void removeNotification(View v) {
-        int position = notificationListFragment.mNotificationListView.getChildAdapterPosition((RelativeLayout) v.getParent().getParent().getParent());
-        notificationListFragment.mNotificationListAdapter.mDataSet.remove(position);
-        notificationListFragment.mNotificationListAdapter.notifyItemRemoved(position);
-        notificationListFragment.mNotificationListAdapter.notifyItemRangeChanged(position, notificationListFragment.mNotificationListAdapter.mDataSet.size());
+        notificationListFragment.removeNotification(v);
+    }
+
+    public void addGroup(View v) {
+
     }
 }
