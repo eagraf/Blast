@@ -19,9 +19,9 @@ public class GroupListFragment extends Fragment {
     private View view;
     private Context context;
 
-    public RecyclerView mNotificationListView;
-    public NotificationListAdapter mNotificationListAdapter;
-    public RecyclerView.LayoutManager mNotificationListLayoutManager;
+    public RecyclerView mGroupListView;
+    public GroupListAdapter mGroupListAdapter;
+    public RecyclerView.LayoutManager mGroupListLayoutManager;
 
     private static final String houses[] = new String[] {"Stark", "Tully", "Arryn", "Greyjoy", "Lannister", "Targaryen", "Baratheon", "Tyrell", "Martell"};
 
@@ -29,20 +29,20 @@ public class GroupListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.notification_list_fragment, container, false);
+        view = inflater.inflate(R.layout.group_list_fragment, container, false);
 
-        mNotificationListView = (RecyclerView) view.findViewById(R.id.notification_list_view);
+        mGroupListView = (RecyclerView) view.findViewById(R.id.group_list_view);
 
-        mNotificationListLayoutManager = new LinearLayoutManager(getActivity());
-        mNotificationListView.setLayoutManager(mNotificationListLayoutManager);
+        mGroupListLayoutManager = new LinearLayoutManager(getActivity());
+        mGroupListView.setLayoutManager(mGroupListLayoutManager);
 
         // specify an adapter (see also next example)
-        mNotificationListAdapter = new NotificationListAdapter(new ArrayList<String>(Arrays.asList(houses)));
-        mNotificationListView.setAdapter(mNotificationListAdapter);
+        mGroupListAdapter = new GroupListAdapter(new ArrayList<String>(Arrays.asList(houses)));
+        mGroupListView.setAdapter(mGroupListAdapter);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        mNotificationListView.setHasFixedSize(true);
+        mGroupListView.setHasFixedSize(true);
         return view;
     }
 

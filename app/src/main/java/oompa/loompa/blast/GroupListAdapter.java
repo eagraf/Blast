@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Ethan on 7/15/2015.
  */
-public class NotificationListAdapter extends RecyclerView.Adapter<NotificationListAdapter.ViewHolder> {
+public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.ViewHolder> {
     public ArrayList<String> mDataSet;
 
     // Provide a reference to the views for each data item
@@ -28,15 +28,15 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
     }
 
     //Constructor provides data for the adapter.
-    public NotificationListAdapter(ArrayList<String> notificationQueue) {
-        mDataSet = notificationQueue;
+    public GroupListAdapter(ArrayList<String> groupList) {
+        mDataSet = groupList;
     }
 
     //Create new views (invoked by the layout manager)
     @Override
-    public NotificationListAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public GroupListAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // create a new view
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.notification_list_item, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.group_list_item, viewGroup, false);
         // set the view's size, margins, paddings and layout parameters
 
         ViewHolder vh = new ViewHolder((RelativeLayout) v);
@@ -45,7 +45,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(NotificationListAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(GroupListAdapter.ViewHolder viewHolder, int i) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         viewHolder.mTextView.setText(mDataSet.get(i));
