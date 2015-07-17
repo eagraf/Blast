@@ -1,6 +1,8 @@
 package oompa.loompa.blast.firebase;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
@@ -11,15 +13,46 @@ import com.firebase.client.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import oompa.loompa.blast.MainActivity;
+
 /**
  * Created by Da-Jin on 7/14/2015.
  */
 public class FirebaseHelper {
-    private static String FIREBASE_URL = "https://android-chat-1.firebaseio.com/";
+    private static String FIREBASE_URL = "https://blastmvp.firebaseio.com/";
     private static Firebase mFirebaseRef;
     private static ValueEventListener mConnectedListener;
     private static Boolean connected = false;
 
+    private static class AuthResultHandler implements Firebase.AuthResultHandler {
+        Context context;
+        public AuthResultHandler(Context context){
+            this.context = context;
+        }
+        @Override
+        public void onAuthenticated(AuthData authData) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("provider", authData.getProvider());
+            if (authData.getProviderData().containsKey("id")) {
+                map.put("provider_id", authData.getProviderData().get("id").toString());
+            }
+            if (authData.getProviderData().containsKey("displayName")) {
+                map.put("displayName", authData.getProviderData().get("displayName").toString());
+            }
+            mFirebaseRef.child("users").child(authData.getUid()).setValue(map);
+            context.startActivity(new Intent(context, MainActivity.class));
+        }
+
+        @Override
+        public void onAuthenticationError(FirebaseError firebaseError) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Error")
+                    .setMessage(firebaseError.toString())
+                    .setPositiveButton(android.R.string.ok, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+    }
 
     public static void onCreate(Context context){
         Firebase.setAndroidContext(context);
@@ -62,26 +95,11 @@ public class FirebaseHelper {
             }
         });
     }
-    public static void authEmail(String email, String password){
-        mFirebaseRef.authWithPassword(email,password, new Firebase.AuthResultHandler() {
-            @Override
-            public void onAuthenticated(AuthData authData) {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("provider", authData.getProvider());
-                if(authData.getProviderData().containsKey("id")) {
-                    map.put("provider_id", authData.getProviderData().get("id").toString());
-                }
-                if(authData.getProviderData().containsKey("displayName")) {
-                    map.put("displayName", authData.getProviderData().get("displayName").toString());
-                }
-                mFirebaseRef.child("users").child(authData.getUid()).setValue(map);
+    public static void authEmail(String email, String password,Context context){
+        mFirebaseRef.authWithPassword(email,password,new AuthResultHandler(context));
+    }
 
-              }
-
-            @Override
-            public void onAuthenticationError(FirebaseError firebaseError) {
-                // there was an error
-            }
-        });
+    public static void authWithToken(String provider, String token, Context context){
+        mFirebaseRef.authWithOAuthToken(provider,token,new AuthResultHandler(context));
     }
 }
