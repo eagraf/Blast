@@ -22,6 +22,12 @@ android {
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/NOTICE'
     }
+    signingConfigs {
+        debug {
+            storeFile file("keystore/debug.keystore")
+        }
+    }
+
 }
 apply plugin: 'com.google.gms.google-services'
 
