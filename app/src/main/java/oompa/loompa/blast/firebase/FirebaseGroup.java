@@ -9,7 +9,6 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 
-import oompa.loompa.blast.FirebaseMetadata;
 import oompa.loompa.blast.Group;
 import oompa.loompa.blast.GroupListener;
 
@@ -58,8 +57,14 @@ public class FirebaseGroup implements Group{
 
     private FirebaseGroup(String name){
         //This constructor just accesses a pre-existing group
-
         groupMessageRef = FirebaseHelper.getFirebaseRef().child("messages").child(name);
+        groupMetaRef = FirebaseHelper.getFirebaseRef().child("groups").child(name);
+
+    }
+
+    @Override
+    public void registerGroupListener(final GroupListener listener) {
+        this.listener = listener;
         groupMessageRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -80,7 +85,6 @@ public class FirebaseGroup implements Group{
 
             }
         });
-        groupMetaRef = FirebaseHelper.getFirebaseRef().child("groups").child(name);
         groupMetaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -94,11 +98,6 @@ public class FirebaseGroup implements Group{
 
             }
         });
-    }
-
-    @Override
-    public void registerGroupListener(GroupListener listener) {
-        this.listener = listener;
     }
 
     @Override
