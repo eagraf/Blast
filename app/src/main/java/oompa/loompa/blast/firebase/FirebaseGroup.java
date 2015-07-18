@@ -20,6 +20,7 @@ public class FirebaseGroup implements Group{
     private final Firebase groupMessageRef;
     private FirebaseMetadata metadata;
     private GroupListener listener;
+    private String name;
 
 
     public static Group createGroup(final String groupName, final FirebaseMetadata meta){
@@ -36,7 +37,9 @@ public class FirebaseGroup implements Group{
 
                 }
             });
-            return new FirebaseGroup(groupName, meta);
+            Group group = new FirebaseGroup(groupName, meta);
+            group.subscribe();
+            return group;
         }
         return null;
     }
@@ -57,9 +60,23 @@ public class FirebaseGroup implements Group{
 
     private FirebaseGroup(String name){
         //This constructor just accesses a pre-existing group
+        this.name = name;
         groupMessageRef = FirebaseHelper.getFirebaseRef().child("messages").child(name);
         groupMetaRef = FirebaseHelper.getFirebaseRef().child("groups").child(name);
 
+    }
+
+    @Override
+    public void subscribe(){
+        String UID = FirebaseHelper.getFirebaseRef().getAuth().getUid();
+        Firebase ref = FirebaseHelper.getFirebaseRef().child("users/"+UID+"/subscriptions/"+name);
+        ref.setValue(true);
+    }
+    @Override
+    public void unsubscribe(){
+        String UID = FirebaseHelper.getFirebaseRef().getAuth().getUid();
+        Firebase ref = FirebaseHelper.getFirebaseRef().child("users/"+UID+"/subscriptions/"+name);
+        ref.setValue(null);
     }
 
     @Override

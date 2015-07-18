@@ -31,7 +31,7 @@ public class FirebaseHelper {
         }
         @Override
         public void onAuthenticated(AuthData authData) {
-            Map<String, String> map = new HashMap<String, String>();
+            Map<String, Object> map = new HashMap<>();
             map.put("provider", authData.getProvider());
             if (authData.getProviderData().containsKey("id")) {
                 map.put("provider_id", authData.getProviderData().get("id").toString());
@@ -39,7 +39,7 @@ public class FirebaseHelper {
             if (authData.getProviderData().containsKey("displayName")) {
                 map.put("displayName", authData.getProviderData().get("displayName").toString());
             }
-            mFirebaseRef.child("users").child(authData.getUid()).setValue(map);
+            mFirebaseRef.child("users").child(authData.getUid()).updateChildren(map);
             context.startActivity(new Intent(context, MainActivity.class));
         }
 
@@ -76,8 +76,9 @@ public class FirebaseHelper {
     public static boolean isConnected(){
         return connected;
     }
+
     //TODO NOT sure if synchronize is needed.
-    public static Firebase getFirebaseRef(){
+    protected static Firebase getFirebaseRef(){
         if(mFirebaseRef==null){
             throw new RuntimeException("Tried to get FirebaseRef before it was created. You dummy probs didn't call FirebaseHelper.onCreate");
         }
