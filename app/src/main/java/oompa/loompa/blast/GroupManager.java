@@ -6,24 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import oompa.loompa.blast.firebase.FirebaseGroup;
+import oompa.loompa.blast.firebase.FirebaseHelper;
 import oompa.loompa.blast.firebase.Message;
 
 /**
  * Created by Ethan on 7/17/2015.
  */
-public class GroupManager implements GroupListener {
+public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionListener {
 
     public ArrayList<Group> groups;
     GroupListAdapter adapter;
 
     public void onConnected() {
         groups = new ArrayList<>();
-        groups.add(FirebaseGroup.accessGroup("alpha"));
-        groups.add(FirebaseGroup.accessGroup("beta"));
 
-        for(int i = 0; i < groups.size(); i++) {
-            groups.get(i).registerGroupListener(this);
-        }
+        FirebaseHelper.registerSubscriptionListener(this);
     }
 
     public void setAdapter(GroupListAdapter adapter) {
@@ -49,5 +46,13 @@ public class GroupManager implements GroupListener {
     @Override
     public void metaDataChange(Group group, Group.Metadata meta) {
 
+    }
+
+    @Override
+    public void subscriptionChanged(List<String> subs) {
+        for(int i = 0; i < subs.size(); i++){
+            groups.add(FirebaseGroup.accessGroup(subs.get(i)));
+            groups.get(i).registerGroupListener(this);
+        }
     }
 }
