@@ -10,7 +10,9 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import oompa.loompa.blast.MainActivity;
@@ -102,5 +104,29 @@ public class FirebaseHelper {
 
     public static void authWithToken(String provider, String token, Context context){
         mFirebaseRef.authWithOAuthToken(provider,token,new AuthResultHandler(context));
+    }
+    public static String getUID(){
+        return mFirebaseRef.getAuth().getUid();
+    }
+    public static void registerSubscriptionListener(final SubscriptionListener listener){
+        mFirebaseRef.child("users/"+getUID()+"/subscriptions/").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> groupNames = new ArrayList<>();
+                Iterable<DataSnapshot> data = dataSnapshot.getChildren();
+                for(DataSnapshot datum:data){
+                    groupNames.add(datum.getKey());
+                }
+                listener.subscriptionChanged(groupNames);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
+    public interface SubscriptionListener {
+        public void subscriptionChanged(List<String> subs);
     }
 }
