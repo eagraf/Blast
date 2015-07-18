@@ -1,4 +1,6 @@
-package oompa.loompa.blast;
+package oompa.loompa.blast.firebase;
+
+import oompa.loompa.blast.Group;
 
 /**
  * Created by Da-Jin on 7/15/2015.
