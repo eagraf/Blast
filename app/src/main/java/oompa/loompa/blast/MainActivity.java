@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import oompa.loompa.blast.firebase.FirebaseHelper;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -54,12 +56,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
+
         notificationListFragment = new NotificationListFragment();
         groupListFragment = new GroupListFragment();
+
         fragmentTransaction.add(R.id.main_content_frame, notificationListFragment);
         fragmentTransaction.commit();
-
-
     }
 
     @Override
@@ -81,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     //Handle click events on navigation drawer items.
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        System.out.println("HIIIIIIIIIIIIII");
         menuItem.setChecked(true);
         fragmentTransaction =getFragmentManager().beginTransaction();
         switch (menuItem.getItemId()) {

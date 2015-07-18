@@ -48,7 +48,7 @@ public class NotificationListFragment extends Fragment {
         return view;
     }
 
-    //Remove a notification from
+    //Remove a notification
     public void removeNotification(View v) {
         int position = mNotificationListView.getChildAdapterPosition((RelativeLayout) v.getParent().getParent().getParent());
         mNotificationListAdapter.mDataSet.remove(position);

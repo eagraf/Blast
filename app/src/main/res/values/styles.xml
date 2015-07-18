@@ -9,4 +9,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- Toolbar theme. -->
+    <style name="ToolbarTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/DeepPurple500</item>
+        <item name="colorPrimaryDark">@color/DeepPurple700</item>
+        <item name="colorAccent">@color/Teal500</item>
+        <item name="android:textColorPrimary">@color/White</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

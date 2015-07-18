@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +25,7 @@ public class GroupListFragment extends Fragment {
     public RecyclerView.LayoutManager mGroupListLayoutManager;
 
     private static final String houses[] = new String[] {"Stark", "Tully", "Arryn", "Greyjoy", "Lannister", "Targaryen", "Baratheon", "Tyrell", "Martell"};
+    private GroupManager groupManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,19 +33,22 @@ public class GroupListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.group_list_fragment, container, false);
 
+        //group manager
+        groupManager = ((BlastApplication) getActivity().getApplication()).groupManager;
+
         mGroupListView = (RecyclerView) view.findViewById(R.id.group_list_view);
 
         mGroupListLayoutManager = new LinearLayoutManager(getActivity());
         mGroupListView.setLayoutManager(mGroupListLayoutManager);
 
         // specify an adapter (see also next example)
-        mGroupListAdapter = new GroupListAdapter(new ArrayList<String>(Arrays.asList(houses)));
+        mGroupListAdapter = new GroupListAdapter(groupManager.groups);
         mGroupListView.setAdapter(mGroupListAdapter);
+        groupManager.setAdapter(mGroupListAdapter);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mGroupListView.setHasFixedSize(true);
         return view;
     }
-
 }
