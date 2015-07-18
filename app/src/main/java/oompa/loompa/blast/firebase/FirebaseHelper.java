@@ -13,6 +13,7 @@ import com.firebase.client.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import oompa.loompa.blast.BlastApplication;
 import oompa.loompa.blast.MainActivity;
 
 /**
@@ -54,7 +55,7 @@ public class FirebaseHelper {
         }
     }
 
-    public static void onCreate(Context context){
+    public static void onCreate(final Context context){
         Firebase.setAndroidContext(context);
         mFirebaseRef = new Firebase(FIREBASE_URL);
         //TODO move this to onstart?
@@ -62,7 +63,9 @@ public class FirebaseHelper {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 connected = (Boolean) dataSnapshot.getValue();
-
+                if(connected) {
+                    ((BlastApplication) context).onConnected();
+                }
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {

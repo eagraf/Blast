@@ -9,7 +9,6 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 
-import oompa.loompa.blast.FirebaseMetadata;
 import oompa.loompa.blast.Group;
 import oompa.loompa.blast.GroupListener;
 
@@ -72,7 +71,7 @@ public class FirebaseGroup implements Group{
                     Log.i("Group","subject: "+msg.getSubject()+"\nbody: "+msg.getBody());
                     messageList.add(msg);
                 }
-                listener.messageChange(messageList);
+                listener.messageChange(FirebaseGroup.this, messageList);
             }
 
             @Override
@@ -86,7 +85,7 @@ public class FirebaseGroup implements Group{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("Group", "group meta snap " + dataSnapshot.getValue());
                 metadata = dataSnapshot.getValue(FirebaseMetadata.class);
-                listener.metaDataChange(metadata);
+                listener.metaDataChange(FirebaseGroup.this, metadata);
             }
 
             @Override
@@ -104,5 +103,9 @@ public class FirebaseGroup implements Group{
     @Override
     public void post(Message message){
         groupMessageRef.push().setValue(message);
+    }
+
+    public FirebaseMetadata getMetadata() {
+        return metadata;
     }
 }
