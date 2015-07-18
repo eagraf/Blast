@@ -5,14 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.firebase.client.AuthData;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import oompa.loompa.blast.BlastApplication;
@@ -112,15 +111,26 @@ public class FirebaseHelper {
         return mFirebaseRef.getAuth().getUid();
     }
     public static void registerSubscriptionListener(final SubscriptionListener listener){
-        mFirebaseRef.child("users/"+getUID()+"/subscriptions/").addValueEventListener(new ValueEventListener() {
+        mFirebaseRef.child("users/"+getUID()+"/subscriptions/").addChildEventListener(new ChildEventListener() {
+
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<String> groupNames = new ArrayList<>();
-                Iterable<DataSnapshot> data = dataSnapshot.getChildren();
-                for(DataSnapshot datum:data){
-                    groupNames.add(datum.getKey());
-                }
-                listener.subscriptionChanged(groupNames);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                listener.subAdded(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                listener.subRemoved(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -130,6 +140,7 @@ public class FirebaseHelper {
         });
     }
     public interface SubscriptionListener {
-        public void subscriptionChanged(List<String> subs);
+        public void subAdded(String subName);
+        public void subRemoved(String subName);
     }
 }
