@@ -91,16 +91,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_content_frame, notificationListFragment);
                 fragmentTransaction.commit();
-                return true;
+                break;
             //Go to the group list.
             case R.id.group_list_item:
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_content_frame, groupListFragment);
                 fragmentTransaction.commit();
-                return true;
+                break;
             default:
                 return true;
         }
+        mDrawerLayout.closeDrawers();
+        return true;
     }
 
 
