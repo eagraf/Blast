@@ -20,67 +20,74 @@ public class FirebaseGroup implements Group{
     private final Firebase groupMessageRef;
     private FirebaseMetadata metadata;
     private GroupListener listener;
-    private String name;
+    private String UID;
+    private ValueEventListener metaListener, messageListener;
 
 
-    public static Group createGroup(final String groupName, final FirebaseMetadata meta){
+    public static Group createGroup(final FirebaseMetadata meta){
+        Firebase messageRef = FirebaseHelper.getFirebaseRef().child("groups").push();
+        String UID = messageRef.getKey();
         if(FirebaseHelper.isConnected()){
-            FirebaseHelper.getFirebaseRef().child("groups/"+groupName).addListenerForSingleValueEvent(new ValueEventListener() {
+            /*FirebaseHelper.getFirebaseRef().child("groups/"+displayName).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String available = dataSnapshot.getValue() == null ? "is":"is not";
-                    Log.i("Group", groupName+" "+available+" available");
+                    Log.i("Group", displayName + " " + available + " available");
                 }
 
                 @Override
                 public void onCancelled(FirebaseError firebaseError) {
 
                 }
-            });
-            Group group = new FirebaseGroup(groupName, meta);
+            });*/
+            Group group = new FirebaseGroup(UID,meta);
             group.subscribe();
             return group;
         }
         return null;
     }
 
-    public static Group accessGroup(String groupName){
+    public static Group accessGroup(String groupUID){
         if(FirebaseHelper.isConnected()){
-            return new FirebaseGroup(groupName);
+            return new FirebaseGroup(groupUID);
         }
         return null;
     }
 
-    private FirebaseGroup(String name, FirebaseMetadata meta){
+    private FirebaseGroup(String UID, FirebaseMetadata meta){
         //This is the constructor to create a group, and set meta
-        this(name);
+        this(UID);
         metadata = meta;
         groupMetaRef.setValue(metadata);
     }
 
-    private FirebaseGroup(String name){
+    private FirebaseGroup(String UID){
         //This constructor just accesses a pre-existing group
-        this.name = name;
-        groupMessageRef = FirebaseHelper.getFirebaseRef().child("messages").child(name);
-        groupMetaRef = FirebaseHelper.getFirebaseRef().child("groups").child(name);
+        this.UID = UID;
+        groupMessageRef = FirebaseHelper.getFirebaseRef().child("messages").child(UID);
+        groupMetaRef = FirebaseHelper.getFirebaseRef().child("groups").child(UID);
 
     }
 
     @Override
     public void subscribe(){
-        Firebase ref = FirebaseHelper.getFirebaseRef().child(FirebaseHelper.getUserDir()+"/subscriptions/"+name);
+        Firebase ref = FirebaseHelper.getFirebaseRef().child(FirebaseHelper.getUserDir()+"/subscriptions/"+ UID);
         ref.setValue(true);
     }
     @Override
     public void unsubscribe(){
-        Firebase ref = FirebaseHelper.getFirebaseRef().child(FirebaseHelper.getUserDir()+"/subscriptions/"+name);
+        Firebase ref = FirebaseHelper.getFirebaseRef().child(FirebaseHelper.getUserDir()+"/subscriptions/"+ UID);
         ref.setValue(null);
     }
 
     @Override
     public void registerGroupListener(final GroupListener listener) {
         this.listener = listener;
-        groupMessageRef.addValueEventListener(new ValueEventListener() {
+        if(messageListener!=null) {
+            groupMessageRef.removeEventListener(messageListener);
+            groupMetaRef.removeEventListener(metaListener);
+        }
+        messageListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("Group", "group data snap " + dataSnapshot.getValue());
@@ -99,8 +106,8 @@ public class FirebaseGroup implements Group{
             public void onCancelled(FirebaseError firebaseError) {
 
             }
-        });
-        groupMetaRef.addValueEventListener(new ValueEventListener() {
+        };
+        metaListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("Group", "group meta snap " + dataSnapshot.getValue());
@@ -112,7 +119,9 @@ public class FirebaseGroup implements Group{
             public void onCancelled(FirebaseError firebaseError) {
 
             }
-        });
+        };
+        groupMessageRef.addValueEventListener(messageListener);
+        groupMetaRef.addValueEventListener(metaListener);
     }
 
     @Override
@@ -124,5 +133,5 @@ public class FirebaseGroup implements Group{
         return metadata;
     }
 
-    public String getName() { return name; }
+    public String getUID() { return UID; }
 }

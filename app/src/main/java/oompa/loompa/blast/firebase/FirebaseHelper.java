@@ -51,6 +51,8 @@ public class FirebaseHelper {
             children.put("profileImageURL",user.getProfileImageURL());
             children.put("UID",user.getUID());
             mFirebaseRef.child(userDir).updateChildren(children);
+
+
             groupManager.onAuthorization();
             context.startActivity(new Intent(context, MainActivity.class));
         }

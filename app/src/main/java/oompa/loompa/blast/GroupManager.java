@@ -40,6 +40,7 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
 
     @Override
     public void metaDataChange(Group group, Group.Metadata meta) {
+        adapter.changedGroup(groups.indexOf(group));
     }
 
     @Override
@@ -54,8 +55,8 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     public void subRemoved(String groupName) {
         System.out.println("Remove " + groupName);
         for(int i = 0; i < groups.size(); i++) {
-            System.out.println(groups.get(i).getName() + ", " + groupName);
-            if(groups.get(i).getName().equals(groupName)) {
+            System.out.println(groups.get(i).getUID() + ", " + groupName);
+            if(groups.get(i).getUID().equals(groupName)) {
                 System.out.println("YOOY");
                 groups.remove(i);
                 adapter.removeGroup(i);

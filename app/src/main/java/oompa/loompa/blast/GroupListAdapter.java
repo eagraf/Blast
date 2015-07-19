@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import oompa.loompa.blast.firebase.FirebaseGroup;
 
 /**
@@ -57,7 +55,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
         catch(InterruptedException e) {
 
         }*/
-        viewHolder.mTextView.setText(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getOwnerUID());
+        viewHolder.mTextView.setText(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getDisplayName());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -80,5 +78,9 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
     public void removeGroup(int position) {
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, groupManager.groups.size()-1);
+    }
+
+    public void changedGroup(int position){
+        notifyItemChanged(position);
     }
 }
