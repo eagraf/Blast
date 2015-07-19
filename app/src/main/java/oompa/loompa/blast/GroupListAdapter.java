@@ -57,7 +57,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
         catch(InterruptedException e) {
 
         }*/
-        viewHolder.mTextView.setText(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getOwnerUID());
+        viewHolder.mTextView.setText(((FirebaseGroup) groupManager.groups.get(i)).getName());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -2,6 +2,7 @@ package oompa.loompa.blast;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import oompa.loompa.blast.firebase.FirebaseHelper;
 
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private NotificationListFragment notificationListFragment;
     private GroupListFragment groupListFragment;
+
+    public final static String MESSAGE_VIEW_TITLE = "oompa.loompa.blast.MESSAGE_VIEW_TITLE";
+    public final static String MESSAGE_VIEW_GROUP_NAME = "oompa.loompa.blast.MESSAGE_VIEW_GROUP_NAME";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,5 +116,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void addGroup(View v) {
 
+    }
+
+    //Open the messages activity.
+    public void openMessages(View v) {
+        Intent intent = new Intent(this, MessageActivity.class);
+        intent.putExtra(MESSAGE_VIEW_TITLE, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
+        intent.putExtra(MESSAGE_VIEW_GROUP_NAME, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
+        startActivity(intent);
     }
 }

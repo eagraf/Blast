@@ -190,5 +190,4 @@ public class FirebaseHelper {
     public interface UserInfoCallback{
         public void infoArrived(User user);
     }
-
 }

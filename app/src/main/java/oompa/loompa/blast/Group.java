@@ -1,5 +1,7 @@
 package oompa.loompa.blast;
 
+import java.util.List;
+
 import oompa.loompa.blast.firebase.Message;
 
 /**
@@ -13,6 +15,7 @@ public interface Group {
     public void registerGroupListener(GroupListener listener);
     public void post(Message message);
     public String getName();
+    public List<Message> getMessages();
 
     public interface Metadata {
         public String getOwnerUID();
