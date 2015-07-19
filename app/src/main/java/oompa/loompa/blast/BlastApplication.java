@@ -7,18 +7,10 @@ import oompa.loompa.blast.firebase.FirebaseHelper;
  */
 public class BlastApplication extends android.app.Application {
 
-    public GroupManager groupManager;
-
     @Override
     public void onCreate() {
         FirebaseHelper.onCreate(this);
         super.onCreate();
-        groupManager = new GroupManager();
-
-    }
-
-    public void onConnected() {
-        groupManager.onConnected();
     }
 }
 

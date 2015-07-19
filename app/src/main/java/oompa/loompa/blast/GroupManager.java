@@ -1,11 +1,10 @@
 package oompa.loompa.blast;
 
-import android.widget.RelativeLayout;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import oompa.loompa.blast.firebase.FirebaseGroup;
 import oompa.loompa.blast.firebase.FirebaseHelper;
 import oompa.loompa.blast.firebase.Message;
 
@@ -17,11 +16,12 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     public ArrayList<Group> groups;
     public GroupListAdapter adapter;
 
-    public void onConnected() {
+    public void onAuthorization() {
         groups = new ArrayList<>();
 
         FirebaseHelper.registerSubscriptionListener(this);
         this.adapter = new GroupListAdapter(this);
+        Log.i("Manager","auth");
     }
 
     public void addGroup() {
@@ -40,13 +40,11 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
 
     @Override
     public void metaDataChange(Group group, Group.Metadata meta) {
-
     }
 
     @Override
     //Listener method for when a subscription is added. Creates a new group to be added to the model.
-    public void subAdded(String groupName) {
-        Group group = FirebaseGroup.accessGroup(groupName);
+    public void subAdded(Group group) {
         group.registerGroupListener(this);
         groups.add(group);
         adapter.addGroup(groups.size() - 1);

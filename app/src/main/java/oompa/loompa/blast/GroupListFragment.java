@@ -8,10 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import oompa.loompa.blast.firebase.FirebaseHelper;
 
 /**
  * Created by Ethan on 7/16/2015.
@@ -34,7 +32,7 @@ public class GroupListFragment extends Fragment {
         view = inflater.inflate(R.layout.group_list_fragment, container, false);
 
         //group manager
-        groupManager = ((BlastApplication) getActivity().getApplication()).groupManager;
+        groupManager = FirebaseHelper.getGroupManager();
 
         mGroupListView = (RecyclerView) view.findViewById(R.id.group_list_view);
 

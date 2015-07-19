@@ -3,6 +3,7 @@ package oompa.loompa.blast.firebase;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.ChildEventListener;
@@ -11,10 +12,12 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-
+import java.util.List;
 import java.util.Map;
 
-import oompa.loompa.blast.BlastApplication;
+import oompa.loompa.blast.Group;
+import oompa.loompa.blast.GroupListener;
+import oompa.loompa.blast.GroupManager;
 import oompa.loompa.blast.MainActivity;
 import oompa.loompa.blast.User;
 
@@ -28,6 +31,7 @@ public class FirebaseHelper {
     private static Boolean connected = false;
     private static FirebaseGoogleUser user;
     private static String userDir;
+    private static GroupManager groupManager;
 
     private static class AuthResultHandler implements Firebase.AuthResultHandler {
         Context context;
@@ -40,6 +44,7 @@ public class FirebaseHelper {
             user = new FirebaseGoogleUser(authData);
             userDir = "users/"+user.getUID();
             mFirebaseRef.child(userDir).setValue(user);
+            groupManager.onAuthorization();
             context.startActivity(new Intent(context, MainActivity.class));
         }
 
@@ -62,15 +67,14 @@ public class FirebaseHelper {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 connected = (Boolean) dataSnapshot.getValue();
-                if(connected) {
-                    ((BlastApplication) context).onConnected();
-                }
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 // No-op
             }
         });
+
+        groupManager = new GroupManager();
     }
     public static void onStop(){
         mFirebaseRef.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
@@ -79,6 +83,9 @@ public class FirebaseHelper {
         return connected;
     }
 
+    public static GroupManager getGroupManager(){
+        return groupManager;
+    }
     //TODO NOT sure if synchronize is needed.
     protected static Firebase getFirebaseRef(){
         if(mFirebaseRef==null){
@@ -92,6 +99,7 @@ public class FirebaseHelper {
             public void onSuccess(Map<String, Object> result) {
                 System.out.println("Successfully created user account with uid: " + result.get("uid"));
             }
+
             @Override
             public void onError(FirebaseError firebaseError) {
                 // there was an error
@@ -103,17 +111,29 @@ public class FirebaseHelper {
     }
 
     public static void authWithToken(String provider, String token, Context context){
-        mFirebaseRef.authWithOAuthToken(provider,token,new AuthResultHandler(context));
+        mFirebaseRef.authWithOAuthToken(provider, token, new AuthResultHandler(context));
     }
     public static String getUserDir(){
         return userDir;
     }
     public static void registerSubscriptionListener(final SubscriptionListener listener){
+        Log.i("Helerp", getUserDir());
         mFirebaseRef.child(getUserDir()+"/subscriptions/").addChildEventListener(new ChildEventListener() {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                listener.subAdded(dataSnapshot.getKey());
+                FirebaseGroup.accessGroup(dataSnapshot.getKey()).registerGroupListener(new GroupListener() {
+                    @Override
+                    public void messageChange(Group group, List<Message> msgs) {
+
+                    }
+
+                    @Override
+                    public void metaDataChange(Group group, Group.Metadata meta) {
+                        //Only add the sub when metadata is in so that ui can display it's name properly
+                        listener.subAdded(group);
+                    }
+                });
             }
 
             @Override
@@ -138,7 +158,7 @@ public class FirebaseHelper {
         });
     }
     public interface SubscriptionListener {
-        public void subAdded(String subName);
+        public void subAdded(Group sub);
         public void subRemoved(String subName);
     }
 
