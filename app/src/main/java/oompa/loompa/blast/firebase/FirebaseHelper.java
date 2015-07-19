@@ -13,6 +13,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -176,11 +177,12 @@ public class FirebaseHelper {
     public static User getCurrentUserInfo(){
         return user;
     }
-    public void getOtherUserInfo(String UID, final UserInfoCallback callback){
+    public static void getOtherUserInfo(String UID, final UserInfoCallback callback){
         FirebaseHelper.getFirebaseRef().child("users/"+UID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                callback.infoArrived(dataSnapshot.getValue(FirebaseGoogleUser.class));
+                Iterator<DataSnapshot> children = dataSnapshot.getChildren().iterator();
+                callback.infoArrived(new FirebaseGoogleUser((String)children.next().getValue(),(String)children.next().getValue(),(String)children.next().getValue(),(String)children.next().getValue()));
             }
 
             @Override

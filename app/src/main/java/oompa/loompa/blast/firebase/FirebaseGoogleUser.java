@@ -19,6 +19,12 @@ public class FirebaseGoogleUser implements User {
 
     }
 
+    public FirebaseGoogleUser(String UID, String displayName, String email, String profileImageURL){
+        this.UID = UID;
+        this.displayName = displayName;
+        this.email = email;
+        this.profileImageURL = profileImageURL;
+    }
     //This is only for the logged in user, because you can only get authdata for yourself
     protected FirebaseGoogleUser(AuthData authData){
         profileImageURL = (String) authData.getProviderData().get("profileImageURL");
