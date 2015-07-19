@@ -12,6 +12,7 @@ public interface Group {
 
     public void registerGroupListener(GroupListener listener);
     public void post(Message message);
+    public String getName();
 
     public interface Metadata {
         public String getOwnerUID();

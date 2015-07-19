@@ -15,16 +15,13 @@ import oompa.loompa.blast.firebase.Message;
 public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionListener {
 
     public ArrayList<Group> groups;
-    GroupListAdapter adapter;
+    public GroupListAdapter adapter;
 
     public void onConnected() {
         groups = new ArrayList<>();
 
         FirebaseHelper.registerSubscriptionListener(this);
-    }
-
-    public void setAdapter(GroupListAdapter adapter) {
-        this.adapter = adapter;
+        this.adapter = new GroupListAdapter(this);
     }
 
     public void addGroup() {
@@ -33,9 +30,7 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
 
     //Remove a group.
     public void removeGroup(Group group) {
-        int position = groups.indexOf(group);
-        adapter.removeGroup(position);
-        groups.remove(group);
+
     }
 
     @Override
@@ -49,10 +44,24 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     }
 
     @Override
-    public void subscriptionChanged(List<String> subs) {
-        for(int i = 0; i < subs.size(); i++){
-            groups.add(FirebaseGroup.accessGroup(subs.get(i)));
-            groups.get(i).registerGroupListener(this);
+    //Listener method for when a subscription is added. Creates a new group to be added to the model.
+    public void subAdded(String groupName) {
+        Group group = FirebaseGroup.accessGroup(groupName);
+        group.registerGroupListener(this);
+        groups.add(group);
+        adapter.addGroup(groups.size() - 1);
+    }
+
+    @Override
+    public void subRemoved(String groupName) {
+        System.out.println("Remove " + groupName);
+        for(int i = 0; i < groups.size(); i++) {
+            System.out.println(groups.get(i).getName() + ", " + groupName);
+            if(groups.get(i).getName().equals(groupName)) {
+                System.out.println("YOOY");
+                groups.remove(i);
+                adapter.removeGroup(i);
+            }
         }
     }
 }

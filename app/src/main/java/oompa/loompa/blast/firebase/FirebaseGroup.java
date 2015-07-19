@@ -123,4 +123,6 @@ public class FirebaseGroup implements Group{
     public FirebaseMetadata getMetadata() {
         return metadata;
     }
+
+    public String getName() { return name; }
 }
