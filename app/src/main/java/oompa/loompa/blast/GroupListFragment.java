@@ -39,7 +39,7 @@ public class GroupListFragment extends Fragment {
         mGroupListView.setLayoutManager(mGroupListLayoutManager);
 
         // specify an adapter (see also next example)
-        mGroupListAdapter = groupManager.adapter;
+        mGroupListAdapter = groupManager.groupAdapter;
         mGroupListView.setAdapter(mGroupListAdapter);
 
         // use this setting to improve performance if you know that changes

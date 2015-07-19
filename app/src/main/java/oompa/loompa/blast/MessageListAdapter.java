@@ -15,7 +15,7 @@ import oompa.loompa.blast.firebase.Message;
  * Created by Ethan on 7/18/2015.
  */
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.ViewHolder> {
-
+    public Group group;
     public ArrayList<Message> mDataSet;
 
     // Provide a reference to the views for each data item
@@ -33,8 +33,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     }
 
     //Constructor provides data for the adapter.
-    public MessageListAdapter(ArrayList<Message> messages) {
-        mDataSet = messages;
+    public MessageListAdapter() {
+
     }
 
     //Create new views (invoked by the layout manager)
@@ -61,5 +61,11 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     @Override
     public int getItemCount() {
         return mDataSet.size();
+    }
+
+    public void resetGroup(Group group) {
+        this.group = group;
+        mDataSet = (ArrayList) group.getMessages();
+        notifyDataSetChanged();
     }
 }
