@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import oompa.loompa.blast.firebase.FirebaseHelper;
 
@@ -42,7 +41,7 @@ public class MessageActivity extends AppCompatActivity {
         GroupManager groupManager = FirebaseHelper.getGroupManager();
         Group group = null;
         for(int i = 0; i < groupManager.groups.size(); i++) {
-            if(name.equals(groupManager.groups.get(i).getName())) {
+            if(name.equals(groupManager.groups.get(i).getUID())) {
                 group = groupManager.groups.get(i);
             }
         }

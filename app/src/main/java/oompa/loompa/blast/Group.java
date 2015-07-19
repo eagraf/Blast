@@ -14,10 +14,11 @@ public interface Group {
 
     public void registerGroupListener(GroupListener listener);
     public void post(Message message);
-    public String getName();
+    public String getUID();
     public List<Message> getMessages();
 
     public interface Metadata {
+        public String getDisplayName();
         public String getOwnerUID();
         public boolean getIsPublic();
     }

@@ -7,17 +7,12 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import oompa.loompa.blast.firebase.FirebaseHelper;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
@@ -96,16 +91,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_content_frame, notificationListFragment);
                 fragmentTransaction.commit();
-                return true;
+                break;
             //Go to the group list.
             case R.id.group_list_item:
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_content_frame, groupListFragment);
                 fragmentTransaction.commit();
-                return true;
+                break;
             default:
                 return true;
         }
+        mDrawerLayout.closeDrawers();
+        return true;
     }
 
 
@@ -122,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void openMessages(View v) {
         Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra(MESSAGE_VIEW_TITLE, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
-        intent.putExtra(MESSAGE_VIEW_GROUP_NAME, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
+        intent.putExtra(MESSAGE_VIEW_GROUP_NAME, ((String) v.findViewById(R.id.firstLine).getTag()));
         startActivity(intent);
     }
 }

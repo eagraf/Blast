@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import oompa.loompa.blast.firebase.FirebaseGroup;
+import oompa.loompa.blast.firebase.FirebaseHelper;
 
 /**
  * Created by Ethan on 7/15/2015.
@@ -21,11 +20,11 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView mTextView;
+        public TextView mTextView, mSecondLine;
         public ViewHolder(RelativeLayout v) {
             super(v);
             mTextView = (TextView) v.findViewById(R.id.firstLine);
+            mSecondLine = (TextView) v.findViewById(R.id.secondLine);
         }
     }
 
@@ -47,7 +46,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(GroupListAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final GroupListAdapter.ViewHolder viewHolder, int i) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         /*
@@ -57,7 +56,14 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
         catch(InterruptedException e) {
 
         }*/
-        viewHolder.mTextView.setText(((FirebaseGroup) groupManager.groups.get(i)).getName());
+        viewHolder.mTextView.setText(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getDisplayName());
+        viewHolder.mTextView.setTag(((FirebaseGroup) groupManager.groups.get(i)).getUID());
+        FirebaseHelper.getOtherUserInfo(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getOwnerUID(), new FirebaseHelper.UserInfoCallback() {
+            @Override
+            public void infoArrived(User user) {
+                viewHolder.mSecondLine.setText("Owner: "+user.getDisplayName());
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -80,5 +86,9 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
     public void removeGroup(int position) {
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, groupManager.groups.size()-1);
+    }
+
+    public void changedGroup(int position){
+        notifyItemChanged(position);
     }
 }
