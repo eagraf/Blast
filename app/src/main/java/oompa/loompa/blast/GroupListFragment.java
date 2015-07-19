@@ -22,7 +22,6 @@ public class GroupListFragment extends Fragment {
     public GroupListAdapter mGroupListAdapter;
     public RecyclerView.LayoutManager mGroupListLayoutManager;
 
-    private static final String houses[] = new String[] {"Stark", "Tully", "Arryn", "Greyjoy", "Lannister", "Targaryen", "Baratheon", "Tyrell", "Martell"};
     private GroupManager groupManager;
 
     @Override

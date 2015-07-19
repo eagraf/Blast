@@ -57,6 +57,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
 
         }*/
         viewHolder.mTextView.setText(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getDisplayName());
+        viewHolder.mTextView.setTag(((FirebaseGroup) groupManager.groups.get(i)).getUID());
         FirebaseHelper.getOtherUserInfo(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getOwnerUID(), new FirebaseHelper.UserInfoCallback() {
             @Override
             public void infoArrived(User user) {

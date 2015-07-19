@@ -8,6 +8,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import oompa.loompa.blast.Group;
 import oompa.loompa.blast.GroupListener;
@@ -22,6 +23,7 @@ public class FirebaseGroup implements Group{
     private GroupListener listener;
     private String UID;
     private ValueEventListener metaListener, messageListener;
+    private List<Message> messages;
 
 
     public static Group createGroup(final FirebaseMetadata meta){
@@ -99,6 +101,7 @@ public class FirebaseGroup implements Group{
                     Log.i("Group","subject: "+msg.getSubject()+"\nbody: "+msg.getBody());
                     messageList.add(msg);
                 }
+                messages = messageList;
                 listener.messageChange(FirebaseGroup.this, messageList);
             }
 
@@ -122,6 +125,11 @@ public class FirebaseGroup implements Group{
         };
         groupMessageRef.addValueEventListener(messageListener);
         groupMetaRef.addValueEventListener(metaListener);
+    }
+
+    @Override
+    public List<Message> getMessages() {
+        return messages;
     }
 
     @Override
