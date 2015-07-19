@@ -2,6 +2,9 @@ package oompa.loompa.blast.firebase;
 
 import com.firebase.client.AuthData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import oompa.loompa.blast.User;
 
 /**
@@ -9,6 +12,7 @@ import oompa.loompa.blast.User;
  */
 public class FirebaseGoogleUser implements User {
     private String profileImageURL, UID, displayName, email;
+    private List<String> subscriptions;
 
     @SuppressWarnings("unused")
     private FirebaseGoogleUser(){
@@ -21,6 +25,7 @@ public class FirebaseGoogleUser implements User {
         UID = authData.getUid();
         displayName = (String) authData.getProviderData().get("displayName");
         email = (String) authData.getProviderData().get("email");
+        subscriptions = new ArrayList<>();
     }
 
     @Override
@@ -42,4 +47,10 @@ public class FirebaseGoogleUser implements User {
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public List<String> getSubscriptions(){
+        return subscriptions;
+    }
+
 }

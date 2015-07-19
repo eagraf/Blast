@@ -12,6 +12,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,13 @@ public class FirebaseHelper {
         public void onAuthenticated(AuthData authData) {
             user = new FirebaseGoogleUser(authData);
             userDir = "users/"+user.getUID();
-            mFirebaseRef.child(userDir).setValue(user);
+
+            Map<String, Object> children = new HashMap<>();
+            children.put("displayName",user.getDisplayName());
+            children.put("email",user.getEmail());
+            children.put("profileImageURL",user.getProfileImageURL());
+            children.put("UID",user.getUID());
+            mFirebaseRef.child(userDir).updateChildren(children);
             groupManager.onAuthorization();
             context.startActivity(new Intent(context, MainActivity.class));
         }
@@ -122,6 +129,7 @@ public class FirebaseHelper {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                user.getSubscriptions().add(dataSnapshot.getKey());
                 FirebaseGroup.accessGroup(dataSnapshot.getKey()).registerGroupListener(new GroupListener() {
                     @Override
                     public void messageChange(Group group, List<Message> msgs) {
@@ -143,6 +151,7 @@ public class FirebaseHelper {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                user.getSubscriptions().remove(dataSnapshot.getKey());
                 listener.subRemoved(dataSnapshot.getKey());
             }
 
