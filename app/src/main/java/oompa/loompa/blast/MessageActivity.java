@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+import oompa.loompa.blast.firebase.FirebaseGroup;
 import oompa.loompa.blast.firebase.FirebaseHelper;
 
 /**
@@ -37,11 +38,10 @@ public class MessageActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
 
         String name = intent.getStringExtra(MainActivity.MESSAGE_VIEW_GROUP_NAME);
-        System.out.println(getParent());
         GroupManager groupManager = FirebaseHelper.getGroupManager();
         Group group = null;
         for(int i = 0; i < groupManager.groups.size(); i++) {
-            if(name.equals(groupManager.groups.get(i).getUID())) {
+            if(name.equals(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getDisplayName())) {
                 group = groupManager.groups.get(i);
             }
         }

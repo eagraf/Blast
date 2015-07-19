@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void openMessages(View v) {
         Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra(MESSAGE_VIEW_TITLE, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
-        intent.putExtra(MESSAGE_VIEW_GROUP_NAME, ((String) v.findViewById(R.id.firstLine).getTag()));
+        intent.putExtra(MESSAGE_VIEW_GROUP_NAME, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
         startActivity(intent);
     }
 }
