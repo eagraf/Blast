@@ -68,12 +68,12 @@ public class FirebaseGroup implements Group{
 
     @Override
     public void subscribe(){
-        Firebase ref = FirebaseHelper.getFirebaseRef().child("users/"+FirebaseHelper.getUID()+"/subscriptions/"+name);
+        Firebase ref = FirebaseHelper.getFirebaseRef().child(FirebaseHelper.getUserDir()+"/subscriptions/"+name);
         ref.setValue(true);
     }
     @Override
     public void unsubscribe(){
-        Firebase ref = FirebaseHelper.getFirebaseRef().child("users/"+FirebaseHelper.getUID()+"/subscriptions/"+name);
+        Firebase ref = FirebaseHelper.getFirebaseRef().child(FirebaseHelper.getUserDir()+"/subscriptions/"+name);
         ref.setValue(null);
     }
 
