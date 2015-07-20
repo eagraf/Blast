@@ -15,7 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import oompa.loompa.blast.firebase.FirebaseGroup;
+import oompa.loompa.blast.firebase.FirebaseHelper;
+import oompa.loompa.blast.firebase.FirebaseMetadata;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        NewGroupDialogFragment.NewGroupDialogListener {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView mDrawerView;
@@ -112,8 +117,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         notificationListFragment.removeNotification(v);
     }
 
-    public void addGroup(View v) {
-
+    //Create a new group
+    public void newGroup(View v) {
+        // Create an instance of the new group dialog fragment and show it
+        NewGroupDialogFragment dialog = new NewGroupDialogFragment();
+        dialog.setTitle(getResources().getString(R.string.dialog_new_group));
+        dialog.show(getSupportFragmentManager(), "NewGroupDialogFragment");
     }
 
     public void openMessageView(View v) {
@@ -121,5 +130,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra(MESSAGE_VIEW_TITLE, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
         intent.putExtra(MESSAGE_VIEW_GROUP_NAME, ((TextView) v.findViewById(R.id.uid)).getText().toString());
         this.startActivity(intent);
+    }
+
+    @Override
+    public void onDialogPositiveClick(NewGroupDialogFragment dialog, String groupName) {
+        FirebaseMetadata metadata = new FirebaseMetadata(groupName, FirebaseHelper.getCurrentUserInfo().getUID(), true);
+        FirebaseGroup.createGroup(metadata);
+    }
+
+    @Override
+    //Negative click on New Group Dialog
+    public void onDialogNegativeClick(NewGroupDialogFragment dialog) {
+        // User touched the dialog's negative button
+        // Nothing happens
     }
 }
