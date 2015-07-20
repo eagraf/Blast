@@ -1,5 +1,7 @@
 package oompa.loompa.blast;
 
+import android.widget.AdapterView;
+
 import java.util.List;
 
 import oompa.loompa.blast.firebase.Message;

@@ -84,7 +84,7 @@ public class FirebaseHelper {
             }
         });
 
-        groupManager = new GroupManager();
+        groupManager = new GroupManager(context);
     }
     public static void onStop(){
         mFirebaseRef.getRoot().child(".info/connected").removeEventListener(mConnectedListener);

@@ -1,6 +1,10 @@
 package oompa.loompa.blast.firebase;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -12,11 +16,13 @@ import java.util.List;
 
 import oompa.loompa.blast.Group;
 import oompa.loompa.blast.GroupListener;
+import oompa.loompa.blast.MessageActivity;
+import oompa.loompa.blast.R;
 
 /**
  * Created by Da-Jin on 7/14/2015.
  */
-public class FirebaseGroup implements Group{
+public class FirebaseGroup implements Group {
     private final Firebase groupMetaRef;
     private final Firebase groupMessageRef;
     private FirebaseMetadata metadata;

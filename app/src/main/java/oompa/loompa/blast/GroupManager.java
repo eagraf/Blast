@@ -1,6 +1,10 @@
 package oompa.loompa.blast;
 
+import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,11 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
 
     public MessageListAdapter messageAdapter;
 
+    public Context context;
+
+    public GroupManager(Context context) {
+        this.context = context;
+    }
     public void onAuthorization() {
         groups = new ArrayList<>();
 

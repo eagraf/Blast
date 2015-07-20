@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/card_layout">
@@ -29,7 +30,7 @@
             android:layout_height="?android:attr/listPreferredItemHeight"
             android:padding="6dip"
             android:descendantFocusability="blocksDescendants"
-            android:onClick="openMessages">
+            android:onClick="openMessageView">
 
             <ImageView
                 android:id="@+id/icon"
@@ -63,6 +64,12 @@
                 android:layout_toRightOf="@id/icon"
                 android:gravity="center_vertical"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/uid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

@@ -20,11 +20,12 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mFirstLine, mSecondLine;
+        public TextView mFirstLine, mSecondLine, mUid;
         public ViewHolder(RelativeLayout v) {
             super(v);
             mFirstLine = (TextView) v.findViewById(R.id.firstLine);
             mSecondLine = (TextView) v.findViewById(R.id.secondLine);
+            mUid = (TextView) v.findViewById(R.id.uid);
         }
     }
 
@@ -51,10 +52,11 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
         // - replace the contents of the view with that element
         System.out.println(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getDisplayName());
         viewHolder.mFirstLine.setText(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getDisplayName());
+        viewHolder.mUid.setText(((FirebaseGroup) groupManager.groups.get(i)).getUID());
         FirebaseHelper.getOtherUserInfo(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getOwnerUID(), new FirebaseHelper.UserInfoCallback() {
             @Override
             public void infoArrived(User user) {
-                viewHolder.mSecondLine.setText("Owner: "+user.getDisplayName());
+                viewHolder.mSecondLine.setText("Owner: " + user.getDisplayName());
             }
         });
     }

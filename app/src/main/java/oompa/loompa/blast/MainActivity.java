@@ -2,6 +2,7 @@ package oompa.loompa.blast;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -115,11 +116,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    //Open the messages activity.
-    public void openMessages(View v) {
+    public void openMessageView(View v) {
         Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra(MESSAGE_VIEW_TITLE, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
-        intent.putExtra(MESSAGE_VIEW_GROUP_NAME, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
-        startActivity(intent);
+        intent.putExtra(MESSAGE_VIEW_GROUP_NAME, ((TextView) v.findViewById(R.id.uid)).getText().toString());
+        this.startActivity(intent);
     }
 }

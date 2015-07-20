@@ -41,7 +41,7 @@ public class MessageActivity extends AppCompatActivity {
         GroupManager groupManager = FirebaseHelper.getGroupManager();
         Group group = null;
         for(int i = 0; i < groupManager.groups.size(); i++) {
-            if(name.equals(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getDisplayName())) {
+            if(name.equals(((FirebaseGroup) groupManager.groups.get(i)).getUID())) {
                 group = groupManager.groups.get(i);
             }
         }
