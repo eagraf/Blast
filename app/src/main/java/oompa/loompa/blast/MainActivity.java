@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerView = (NavigationView) findViewById(R.id.navigation_view);
         mDrawerView.setNavigationItemSelectedListener(this);
 
+        //Set the navigation drawer information.
+        ((TextView) findViewById(R.id.navigation_header).findViewById(R.id.name)).setText(FirebaseHelper.getCurrentUserInfo().getDisplayName());
+        ((TextView) findViewById(R.id.navigation_header).findViewById(R.id.email)).setText(FirebaseHelper.getCurrentUserInfo().getEmail());
+
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -125,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dialog.show(getSupportFragmentManager(), "NewGroupDialogFragment");
     }
 
+    //Open a new activity to view messages within a group.
     public void openMessageView(View v) {
         Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra(MESSAGE_VIEW_TITLE, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
