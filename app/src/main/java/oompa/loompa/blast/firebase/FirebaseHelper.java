@@ -12,6 +12,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -193,5 +194,27 @@ public class FirebaseHelper {
     }
     public interface UserInfoCallback{
         public void infoArrived(User user);
+    }
+
+    public static void getAllGroups(final AllGroupsCallback callback){
+
+        mFirebaseRef.child("groups").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Group.Metadata> groupData = new ArrayList<Group.Metadata>();
+                for(DataSnapshot data:dataSnapshot.getChildren()){
+                    groupData.add(data.getValue(FirebaseMetadata.class));
+                }
+                callback.dataArrived(groupData);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
+    public interface AllGroupsCallback{
+        public void dataArrived(List<Group.Metadata> allGroups);
     }
 }
