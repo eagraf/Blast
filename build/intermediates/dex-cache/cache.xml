@@ -2,25 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.5.0\jars\classes.jar"
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.5.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-e19130ca3bfa1aa90f298625f20b842fbee40b9b.jar" />
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-cacdf568439a205c335295706ab0c62558c576c4.jar" />
     </item>
     <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\22.0.0\jars\classes.jar"
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="11842de6a309c447b3a3d60d73ad637a87c58994">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-81f6df740abb81e95d9947f2ad858b8cda97c1d3.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-a997253bd6d8f4666c9e82991bd9f56a41f32a14.jar" />
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-1de1dcb92fd79349e3976c134eec19c78e2ab6a6.jar" />
     </item>
     <item
         jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.5.0\jars\classes.jar"
@@ -30,102 +23,18 @@
         <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-4e6649d2f3ed201219e4c84f77532aacb5954a79.jar" />
     </item>
     <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-e19130ca3bfa1aa90f298625f20b842fbee40b9b.jar" />
+    </item>
+    <item
         jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.5.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
         <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-4169907b9a374510703ae918842b13a6d1f49360.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d405025c600055237c171a0bbabaa49d69696573">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-9d5f133560e4b37d9a1a1f330cce04cdb0ce2b41.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-03ad331d26c0fc2e1a5dc67b805347abfbe33b0a.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-b7c4470698522a2a64b1860ab6199286e3c25403.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.2.2\d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b\jackson-core-2.2.2.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\jackson-core-2.2.2-acc8d1002c0075590ae1b8fefded7fe2f312a4b6.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-26661bdd09dd36b2b97fee65240102001c771216.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-0ce8a3734b52cae61520ae825fa57b6b0acbbc45.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-3ebe14478fab6accc34e48289bb5d2cfc1dbc49a.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-a3cf8fe733f218671699d3e7e42e3ed6a9573c79.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-805184b79041e830faedd68eb12959622f22ab82.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-44b7962386765db89f887bff41f3c8aa0e4ac21c.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-0fa04fce733d6da1742a10679e1db41914f1cb3b.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-229a54f669147a6a80e43394f96b7712cc484f06.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-79108483404ebbe03701fb580e262ad5c1372605.jar" />
     </item>
     <item
         jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.5.0\jars\classes.jar"
@@ -135,25 +44,11 @@
         <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-35a00808d32f158b1609bdb35ec4b7c328c84e3a.jar" />
     </item>
     <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.5.0\jars\classes.jar"
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.5.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-cacdf568439a205c335295706ab0c62558c576c4.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-05f4ee5121e1846ea77b56d9f4afe696c6371769.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-android\2.3.1\be29b24233711c419ce935aa0a1b12ebc49d1c9a\firebase-client-android-2.3.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="be29b24233711c419ce935aa0a1b12ebc49d1c9a">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\firebase-client-android-2.3.1-330351284a61a8508033195687c7de6bbc9da480.jar" />
+        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-01d24ca8ef5b107b6b5b9f601ac0d2b365c9ebef.jar" />
     </item>
     <item
         jar="C:\Users\Ethan\.gradle\caches\modules-2\files-2.1\com.firebase\tubesock\0.0.11\d37cb67277928cf59344b4196af8d9cee1f1a27c\tubesock-0.0.11.jar"
@@ -163,46 +58,18 @@
         <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\tubesock-0.0.11-e0343f314b920848a59ceea3d1e5f79f109d3aa6.jar" />
     </item>
     <item
-        jar="C:\Users\Ethan\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-jvm\2.3.1\4d53b7d6983247af02b8fe7e4228fff555a5e828\firebase-client-jvm-2.3.1.jar"
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.5.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="4d53b7d6983247af02b8fe7e4228fff555a5e828">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\firebase-client-jvm-2.3.1-6e21f675ca61be28bec17fca8037f2436c3d0cb3.jar" />
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-229a54f669147a6a80e43394f96b7712cc484f06.jar" />
     </item>
     <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.5.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-6b0adea22f4345fc7beb8d1ca35ddca4bc815095.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-63ce5beb1b9ed3f8ac0de64dfc360ae03583e067.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-5a426cbca1ce8a227abbb3c5382cd9bab19bc809.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-b139e2c0cb3aa3995f31b0e48dfa512ab5e56728.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ethan\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.2.2\285cb9c666f0f0f3dd8a1be04e1f457eb7b15113\jackson-annotations-2.2.2.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="285cb9c666f0f0f3dd8a1be04e1f457eb7b15113">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.2.2-28a07447a5a40461beb455dfce9e2a752e8f82cf.jar" />
+        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-a997253bd6d8f4666c9e82991bd9f56a41f32a14.jar" />
     </item>
     <item
         jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.5.0\jars\classes.jar"
@@ -219,18 +86,74 @@
         <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\jackson-databind-2.2.2-0210021d12e77b7f69ec801125f7a5547c90e858.jar" />
     </item>
     <item
-        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.5.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
-        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-01d24ca8ef5b107b6b5b9f601ac0d2b365c9ebef.jar" />
-    </item>
-    <item
         jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\design\22.2.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
         <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-c4418fa517daf2069fd44ac797161b926108b546.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-b139e2c0cb3aa3995f31b0e48dfa512ab5e56728.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.2.2\285cb9c666f0f0f3dd8a1be04e1f457eb7b15113\jackson-annotations-2.2.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="285cb9c666f0f0f3dd8a1be04e1f457eb7b15113">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.2.2-28a07447a5a40461beb455dfce9e2a752e8f82cf.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d405025c600055237c171a0bbabaa49d69696573">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-9d5f133560e4b37d9a1a1f330cce04cdb0ce2b41.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-jvm\2.3.1\4d53b7d6983247af02b8fe7e4228fff555a5e828\firebase-client-jvm-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4d53b7d6983247af02b8fe7e4228fff555a5e828">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\firebase-client-jvm-2.3.1-6e21f675ca61be28bec17fca8037f2436c3d0cb3.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-android\2.3.1\be29b24233711c419ce935aa0a1b12ebc49d1c9a\firebase-client-android-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="be29b24233711c419ce935aa0a1b12ebc49d1c9a">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\firebase-client-android-2.3.1-330351284a61a8508033195687c7de6bbc9da480.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-79108483404ebbe03701fb580e262ad5c1372605.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-b7c4470698522a2a64b1860ab6199286e3c25403.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-0ce8a3734b52cae61520ae825fa57b6b0acbbc45.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-26661bdd09dd36b2b97fee65240102001c771216.jar" />
     </item>
     <item
         jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.5.0\jars\classes.jar"
@@ -240,11 +163,88 @@
         <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-8738486850b594ea4adba34c0b037c38f5fefade.jar" />
     </item>
     <item
+        jar="C:\Users\Ethan\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.2.2\d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b\jackson-core-2.2.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\jackson-core-2.2.2-acc8d1002c0075590ae1b8fefded7fe2f312a4b6.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-3ebe14478fab6accc34e48289bb5d2cfc1dbc49a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-5a426cbca1ce8a227abbb3c5382cd9bab19bc809.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-42b812a94a298f57f5fb895be7f0abab446cbf4c.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-9af5b552586051c1c718ecc78b1a8239ca38c536.jar" />
+    </item>
+    <item
         jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.0.0\jars\libs\internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
         <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-c96f22bdcbfe4be210ffb868c9d22daa92f16c84.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-a3cf8fe733f218671699d3e7e42e3ed6a9573c79.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-63ce5beb1b9ed3f8ac0de64dfc360ae03583e067.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\22.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="11842de6a309c447b3a3d60d73ad637a87c58994">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-81f6df740abb81e95d9947f2ad858b8cda97c1d3.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.5.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-05f4ee5121e1846ea77b56d9f4afe696c6371769.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3abb4b88f5a8a0584a9b01d3170d7165f12f8588">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-0e624d023b960071cd426ce9c811e386e8abfdd2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="C:\Users\Ethan\AndroidStudioProjects\Blast\app\build\intermediates\pre-dexed\debug\classes-03ad331d26c0fc2e1a5dc67b805347abfbe33b0a.jar" />
     </item>
 
 </items>
