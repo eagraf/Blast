@@ -20,6 +20,7 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     public MessageListAdapter messageAdapter;
 
     public Context context;
+    public MultiGroupMessageListAdapter inboxAdapter;
 
     public GroupManager(Context context) {
         this.context = context;
@@ -27,6 +28,7 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     public void onAuthorization() {
         groups = new ArrayList<>();
 
+        this.inboxAdapter = new MultiGroupMessageListAdapter();
         FirebaseHelper.registerSubscriptionListener(this);
         this.groupAdapter = new GroupListAdapter(this);
         this.messageAdapter = new MessageListAdapter();
@@ -45,11 +47,9 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
 
     @Override
     public void messageChange(Group group, Map<String,Message> msgs) {
-        if(messageAdapter.group != null) {
-            if (group.getUID() == messageAdapter.group.getUID()) {
-                messageAdapter.resetGroup(group);
-            }
-        }
+        Log.i("Manager","Message Change");
+        messageAdapter.updateGroup(group);
+        inboxAdapter.updateGroup(group);
     }
 
     @Override

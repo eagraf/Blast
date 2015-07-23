@@ -8,8 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-
 import oompa.loompa.blast.firebase.FirebaseGroup;
 import oompa.loompa.blast.firebase.FirebaseHelper;
 
@@ -53,7 +51,7 @@ public class MessageActivity extends AppCompatActivity {
 
         // specify an adapter (see also next example)
         mMessageListAdapter = groupManager.messageAdapter;
-        mMessageListAdapter.resetGroup(group);
+        mMessageListAdapter.setGroup(group);
         mMessageListView.setAdapter(mMessageListAdapter);
 
         // use this setting to improve performance if you know that changes
