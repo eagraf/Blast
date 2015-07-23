@@ -13,6 +13,8 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import oompa.loompa.blast.Group;
 import oompa.loompa.blast.GroupListener;
@@ -29,7 +31,7 @@ public class FirebaseGroup implements Group {
     private GroupListener listener;
     private String UID;
     private ValueEventListener metaListener, messageListener;
-    private List<Message> messages;
+    private Map<String, Message> messages;
 
 
     public static Group createGroup(final FirebaseMetadata meta){
@@ -100,12 +102,12 @@ public class FirebaseGroup implements Group {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("Group", "group data snap " + dataSnapshot.getValue());
 
-                ArrayList<Message> messageList = new ArrayList<Message>();
+                Map<String, Message> messageList = new TreeMap<>();
                 Iterable<DataSnapshot> data = dataSnapshot.getChildren();
                 for(DataSnapshot datum:data){
                     Message msg = datum.getValue(Message.class);
                     Log.i("Group","subject: "+msg.getSubject()+"\nbody: "+msg.getBody());
-                    messageList.add(msg);
+                    messageList.put(datum.getKey(), msg);
                 }
                 messages = messageList;
                 listener.messageChange(FirebaseGroup.this, messageList);
@@ -134,7 +136,7 @@ public class FirebaseGroup implements Group {
     }
 
     @Override
-    public List<Message> getMessages() {
+    public Map<String, Message> getMessages() {
         return messages;
     }
 

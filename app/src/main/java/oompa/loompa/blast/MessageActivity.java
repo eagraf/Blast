@@ -53,7 +53,7 @@ public class MessageActivity extends AppCompatActivity {
 
         // specify an adapter (see also next example)
         mMessageListAdapter = groupManager.messageAdapter;
-        mMessageListAdapter.resetGroup(group);
+        mMessageListAdapter.setGroup(group);
         mMessageListView.setAdapter(mMessageListAdapter);
 
         // use this setting to improve performance if you know that changes
