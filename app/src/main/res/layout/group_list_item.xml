@@ -21,7 +21,6 @@
         android:layout_marginBottom="0dp"
         android:focusableInTouchMode="true"
         android:longClickable="true"
-        android:layout_alignParentRight="true"
         android:background="@color/White"
         android:padding="6dp">
 
