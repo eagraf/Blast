@@ -12,10 +12,8 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import oompa.loompa.blast.Group;
@@ -44,6 +42,8 @@ public class FirebaseHelper {
         }
         @Override
         public void onAuthenticated(AuthData authData) {
+            Log.i("Helper","authenticated");
+
             user = new FirebaseGoogleUser(authData);
             userDir = "users/"+user.getUID();
 
@@ -122,6 +122,8 @@ public class FirebaseHelper {
     }
 
     public static void authWithToken(String provider, String token, Context context){
+        Log.i("Helper","authenticating");
+
         mFirebaseRef.authWithOAuthToken(provider, token, new AuthResultHandler(context));
     }
     public static String getUserDir(){
@@ -196,16 +198,27 @@ public class FirebaseHelper {
         public void infoArrived(User user);
     }
 
-    public static void getAllGroups(final AllGroupsCallback callback){
+    public static void registerAllGroupsMetaListener(final AllGroupsListener listener){
 
-        mFirebaseRef.child("groups").addListenerForSingleValueEvent(new ValueEventListener() {
+        mFirebaseRef.child("groups").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Group.Metadata> groupData = new ArrayList<Group.Metadata>();
-                for(DataSnapshot data:dataSnapshot.getChildren()){
-                    groupData.add(data.getValue(FirebaseMetadata.class));
-                }
-                callback.dataArrived(groupData);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                listener.metaDataAdded(dataSnapshot.getValue(FirebaseMetadata.class));
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                listener.metaDataRemoved(dataSnapshot.getValue(FirebaseMetadata.class));
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -214,7 +227,8 @@ public class FirebaseHelper {
             }
         });
     }
-    public interface AllGroupsCallback{
-        public void dataArrived(List<Group.Metadata> allGroups);
+    public interface AllGroupsListener {
+        public void metaDataAdded(Group.Metadata meta);
+        public void metaDataRemoved(Group.Metadata meta);
     }
 }

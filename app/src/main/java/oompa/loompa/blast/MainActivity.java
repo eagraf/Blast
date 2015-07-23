@@ -2,7 +2,6 @@ package oompa.loompa.blast;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 
 import oompa.loompa.blast.firebase.FirebaseGroup;
 import oompa.loompa.blast.firebase.FirebaseHelper;
-import oompa.loompa.blast.firebase.FirebaseMetadata;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         NewGroupDialogFragment.NewGroupDialogListener {
@@ -30,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private NotificationListFragment notificationListFragment;
     private GroupListFragment groupListFragment;
+    private FindGroupsListFragment findGroupsListFragment;
 
     public final static String MESSAGE_VIEW_TITLE = "oompa.loompa.blast.MESSAGE_VIEW_TITLE";
     public final static String MESSAGE_VIEW_GROUP_NAME = "oompa.loompa.blast.MESSAGE_VIEW_GROUP_NAME";
@@ -69,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         notificationListFragment = new NotificationListFragment();
         groupListFragment = new GroupListFragment();
+        findGroupsListFragment = new FindGroupsListFragment();
 
         fragmentTransaction.add(R.id.main_content_frame, notificationListFragment);
         fragmentTransaction.commit();
@@ -108,6 +108,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.replace(R.id.main_content_frame, groupListFragment);
                 fragmentTransaction.commit();
                 break;
+            //Go to the find groups list.
+            case R.id.find_groups_list_item:
+                fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_content_frame, findGroupsListFragment);
+                fragmentTransaction.commit();
+                break;
             default:
                 return true;
         }
@@ -139,8 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onDialogPositiveClick(NewGroupDialogFragment dialog, String groupName) {
-        FirebaseMetadata metadata = new FirebaseMetadata(groupName, FirebaseHelper.getCurrentUserInfo().getUID(), true);
-        FirebaseGroup.createGroup(metadata);
+        FirebaseGroup.createGroup(groupName, FirebaseHelper.getCurrentUserInfo().getUID(), true);
     }
 
     @Override

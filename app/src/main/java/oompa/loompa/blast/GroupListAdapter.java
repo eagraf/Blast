@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import oompa.loompa.blast.firebase.FirebaseGroup;
 import oompa.loompa.blast.firebase.FirebaseHelper;
 
 /**
@@ -50,10 +49,14 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
     public void onBindViewHolder(final GroupListAdapter.ViewHolder viewHolder, int i) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        System.out.println(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getDisplayName());
-        viewHolder.mFirstLine.setText(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getDisplayName());
-        viewHolder.mUid.setText(((FirebaseGroup) groupManager.groups.get(i)).getUID());
-        FirebaseHelper.getOtherUserInfo(((FirebaseGroup) groupManager.groups.get(i)).getMetadata().getOwnerUID(), new FirebaseHelper.UserInfoCallback() {
+        bindViewHolderWithMetadata(viewHolder, groupManager.groups.get(i).getMetadata());
+    }
+
+    public void bindViewHolderWithMetadata(final ViewHolder viewHolder, Group.Metadata metadata){
+        System.out.println(metadata.getDisplayName());
+        viewHolder.mFirstLine.setText(metadata.getDisplayName());
+        viewHolder.mUid.setText(metadata.getGroupUID());
+        FirebaseHelper.getOtherUserInfo(metadata.getOwnerUID(), new FirebaseHelper.UserInfoCallback() {
             @Override
             public void infoArrived(User user) {
                 viewHolder.mSecondLine.setText("Owner: " + user.getDisplayName());
@@ -74,13 +77,13 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
     //Add a group to the list.
     public void addGroup(int position) {
         notifyItemInserted(position);
-        notifyItemRangeChanged(position, groupManager.groups.size()-1);
+        notifyItemRangeChanged(position, position);
     }
 
     //Remove a group from the list.
-    public void removeGroup(int position) {
+    public void removeGroup(int position, int size) {
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, groupManager.groups.size()-1);
+        notifyItemRangeChanged(position, size);
     }
 
     public void changedGroup(int position){

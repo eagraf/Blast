@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import oompa.loompa.blast.firebase.FirebaseHelper;
@@ -12,10 +13,12 @@ import oompa.loompa.blast.firebase.Message;
 /**
  * Created by Ethan on 7/17/2015.
  */
-public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionListener {
+public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionListener, FirebaseHelper.AllGroupsListener {
 
     public ArrayList<Group> groups;
+    public List<Group.Metadata> allGroupsMeta = new ArrayList<>();
     public GroupListAdapter groupAdapter;
+    public FindGroupsListAdapter findGroupsAdapater;
 
     public MessageListAdapter messageAdapter;
 
@@ -28,10 +31,13 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     public void onAuthorization() {
         groups = new ArrayList<>();
 
-        this.inboxAdapter = new MultiGroupMessageListAdapter();
         FirebaseHelper.registerSubscriptionListener(this);
+        FirebaseHelper.registerAllGroupsMetaListener(this);
         this.groupAdapter = new GroupListAdapter(this);
+        this.findGroupsAdapater = new FindGroupsListAdapter(this);
         this.messageAdapter = new MessageListAdapter();
+        this.inboxAdapter = new MultiGroupMessageListAdapter();
+
 
         Log.i("Manager","auth");
     }
@@ -65,12 +71,28 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     }
 
     @Override
-    public void subRemoved(String groupName) {
+    public void subRemoved(String groupUID) {
         for(int i = 0; i < groups.size(); i++) {
-            System.out.println(groups.get(i).getUID() + ", " + groupName);
-            if(groups.get(i).getUID().equals(groupName)) {
+            System.out.println(groups.get(i).getUID() + ", " + groupUID);
+            if(groups.get(i).getUID().equals(groupUID)) {
                 groups.remove(i);
-                groupAdapter.removeGroup(i);
+                groupAdapter.removeGroup(i,groups.size()-1);
+            }
+        }
+    }
+
+    @Override
+    public void metaDataAdded(Group.Metadata meta) {
+        allGroupsMeta.add(meta);
+        findGroupsAdapater.addGroup(allGroupsMeta.size()-1);
+    }
+
+    @Override
+    public void metaDataRemoved(Group.Metadata removed) {
+        for(int i = 0; i < allGroupsMeta.size(); i++) {
+            if(allGroupsMeta.get(i).getGroupUID().equals(removed.getGroupUID())) {
+                allGroupsMeta.remove(i);
+                findGroupsAdapater.removeGroup(i, allGroupsMeta.size() - 1);
             }
         }
     }

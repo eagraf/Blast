@@ -9,7 +9,11 @@
         <item
             android:id="@+id/group_list_item"
             android:icon="@drawable/ic_launcher"
-            android:title="Groups"/>
+            android:title="Subscriptions"/>
+        <item
+            android:id="@+id/find_groups_list_item"
+            android:icon="@drawable/ic_launcher"
+            android:title="FInd Groups"/>
     </group>
 
 </menu>

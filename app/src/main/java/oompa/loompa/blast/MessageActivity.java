@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import java.util.ArrayList;
-
 import oompa.loompa.blast.firebase.FirebaseGroup;
 import oompa.loompa.blast.firebase.FirebaseHelper;
 import oompa.loompa.blast.firebase.Message;

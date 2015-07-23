@@ -1,9 +1,6 @@
 package oompa.loompa.blast;
 
-import android.widget.AdapterView;
-
-import java.util.List;
-
+import oompa.loompa.blast.firebase.FirebaseMetadata;
 import oompa.loompa.blast.firebase.Message;
 
 /**
@@ -16,6 +13,9 @@ public interface Group {
 
     public void registerGroupListener(GroupListener listener);
     public void post(Message message);
+
+    FirebaseMetadata getMetadata();
+
     public String getUID();
     public java.util.Map<String, Message> getMessages();
 
@@ -23,5 +23,6 @@ public interface Group {
         public String getDisplayName();
         public String getOwnerUID();
         public boolean getIsPublic();
+        public String getGroupUID();
     }
 }

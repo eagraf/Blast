@@ -1,25 +1,17 @@
 package oompa.loompa.blast.firebase;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import oompa.loompa.blast.Group;
 import oompa.loompa.blast.GroupListener;
-import oompa.loompa.blast.MessageActivity;
-import oompa.loompa.blast.R;
 
 /**
  * Created by Da-Jin on 7/14/2015.
@@ -34,7 +26,7 @@ public class FirebaseGroup implements Group {
     private Map<String, Message> messages;
 
 
-    public static Group createGroup(final FirebaseMetadata meta){
+    public static Group createGroup(String groupName, String ownerUID, boolean isPublic){
         Firebase messageRef = FirebaseHelper.getFirebaseRef().child("groups").push();
         String UID = messageRef.getKey();
         if(FirebaseHelper.isConnected()){
@@ -50,6 +42,7 @@ public class FirebaseGroup implements Group {
 
                 }
             });*/
+            FirebaseMetadata meta = new FirebaseMetadata(UID,groupName,ownerUID,isPublic);
             Group group = new FirebaseGroup(UID,meta);
             group.subscribe();
             return group;
@@ -145,6 +138,7 @@ public class FirebaseGroup implements Group {
         groupMessageRef.push().setValue(message);
     }
 
+    @Override
     public FirebaseMetadata getMetadata() {
         return metadata;
     }
