@@ -3,6 +3,8 @@ package oompa.loompa.blast;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +41,16 @@ public class MessageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String title = intent.getStringExtra(MainActivity.MESSAGE_VIEW_TITLE);
         getSupportActionBar().setTitle(title);
+
+        //Sets icon to go back to previous activity.
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavUtils.navigateUpFromSameTask(MessageActivity.this);
+            }
+        });
 
         String name = intent.getStringExtra(MainActivity.MESSAGE_VIEW_GROUP_NAME);
         GroupManager groupManager = FirebaseHelper.getGroupManager();

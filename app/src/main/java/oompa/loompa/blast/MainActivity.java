@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Enable ActionBar app icon to behave as action to toggle nav drawer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationIcon(R.drawable.ic_launcher);
+        mToolbar.setNavigationIcon(R.drawable.ic_menu_white);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,5 +153,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onDialogNegativeClick(NewGroupDialogFragment dialog) {
         // User touched the dialog's negative button
         // Nothing happens
+    }
+
+    //Don't go back GoogleOAuthActivity, go back to home screen.
+    public void onBackPressed() {
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startMain);
+
     }
 }
