@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 import oompa.loompa.blast.firebase.Message;
 
@@ -16,7 +16,8 @@ import oompa.loompa.blast.firebase.Message;
  */
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.ViewHolder> {
     public Group group;
-    public ArrayList<Message> mDataSet;
+    public TreeMap<String,Message> mDataSet;
+    public Object[] keys;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -53,8 +54,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     public void onBindViewHolder(MessageListAdapter.ViewHolder viewHolder, int i) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        viewHolder.mSecondLine.setText(mDataSet.get(i).getBody());
-        viewHolder.mFirstLine.setText(mDataSet.get(i).getSubject());
+        viewHolder.mSecondLine.setText(mDataSet.get((String)keys[i]).getBody());
+        viewHolder.mFirstLine.setText(mDataSet.get(keys[i]).getSubject());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -65,7 +66,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     public void resetGroup(Group group) {
         this.group = group;
-        mDataSet = (ArrayList) group.getMessages();
+        mDataSet = (TreeMap<String, Message>) group.getMessages();
+        keys=mDataSet.keySet().toArray();
         notifyDataSetChanged();
     }
 }

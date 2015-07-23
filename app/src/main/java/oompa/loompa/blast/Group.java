@@ -17,7 +17,7 @@ public interface Group {
     public void registerGroupListener(GroupListener listener);
     public void post(Message message);
     public String getUID();
-    public List<Message> getMessages();
+    public java.util.Map<String, Message> getMessages();
 
     public interface Metadata {
         public String getDisplayName();

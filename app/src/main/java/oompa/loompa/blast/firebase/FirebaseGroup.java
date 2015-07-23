@@ -1,23 +1,17 @@
 package oompa.loompa.blast.firebase;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import oompa.loompa.blast.Group;
 import oompa.loompa.blast.GroupListener;
-import oompa.loompa.blast.MessageActivity;
-import oompa.loompa.blast.R;
 
 /**
  * Created by Da-Jin on 7/14/2015.
@@ -29,7 +23,8 @@ public class FirebaseGroup implements Group {
     private GroupListener listener;
     private String UID;
     private ValueEventListener metaListener, messageListener;
-    private List<Message> messages;
+    private TreeMap<String, Message> messages;
+
 
 
     public static Group createGroup(final FirebaseMetadata meta){
@@ -100,15 +95,14 @@ public class FirebaseGroup implements Group {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("Group", "group data snap " + dataSnapshot.getValue());
 
-                ArrayList<Message> messageList = new ArrayList<Message>();
+                messages = new TreeMap<>();
                 Iterable<DataSnapshot> data = dataSnapshot.getChildren();
                 for(DataSnapshot datum:data){
                     Message msg = datum.getValue(Message.class);
                     Log.i("Group","subject: "+msg.getSubject()+"\nbody: "+msg.getBody());
-                    messageList.add(msg);
+                    messages.put(datum.getKey(), msg);
                 }
-                messages = messageList;
-                listener.messageChange(FirebaseGroup.this, messageList);
+                listener.messageChange(FirebaseGroup.this, messages);
             }
 
             @Override
@@ -134,7 +128,7 @@ public class FirebaseGroup implements Group {
     }
 
     @Override
-    public List<Message> getMessages() {
+    public Map<String, Message> getMessages() {
         return messages;
     }
 
