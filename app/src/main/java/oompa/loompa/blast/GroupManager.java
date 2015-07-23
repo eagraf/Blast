@@ -2,12 +2,9 @@ package oompa.loompa.blast;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import oompa.loompa.blast.firebase.FirebaseHelper;
 import oompa.loompa.blast.firebase.Message;
@@ -23,6 +20,7 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     public MessageListAdapter messageAdapter;
 
     public Context context;
+    public MultiGroupMessageListAdapter inboxAdapter;
 
     public GroupManager(Context context) {
         this.context = context;
@@ -30,6 +28,7 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     public void onAuthorization() {
         groups = new ArrayList<>();
 
+        this.inboxAdapter = new MultiGroupMessageListAdapter();
         FirebaseHelper.registerSubscriptionListener(this);
         this.groupAdapter = new GroupListAdapter(this);
         this.messageAdapter = new MessageListAdapter();
@@ -47,12 +46,10 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     }
 
     @Override
-    public void messageChange(Group group, List<Message> msgs) {
-        if(messageAdapter.group != null) {
-            if (group.getUID() == messageAdapter.group.getUID()) {
-                messageAdapter.resetGroup(group);
-            }
-        }
+    public void messageChange(Group group, Map<String,Message> msgs) {
+        Log.i("Manager","Message Change");
+        messageAdapter.updateGroup(group);
+        inboxAdapter.updateGroup(group);
     }
 
     @Override

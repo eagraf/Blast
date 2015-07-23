@@ -18,7 +18,6 @@ import oompa.loompa.blast.Group;
 import oompa.loompa.blast.GroupListener;
 import oompa.loompa.blast.MessageActivity;
 import oompa.loompa.blast.R;
-import oompa.loompa.blast.User;
 
 /**
  * Created by Da-Jin on 7/14/2015.

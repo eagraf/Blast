@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import oompa.loompa.blast.firebase.FirebaseHelper;
 
 /**
  * Created by Ethan on 7/16/2015.
@@ -22,7 +21,7 @@ public class NotificationListFragment extends Fragment {
     private Context context;
 
     public RecyclerView mNotificationListView;
-    public NotificationListAdapter mNotificationListAdapter;
+    public MultiGroupMessageListAdapter mNotificationListAdapter;
     public RecyclerView.LayoutManager mNotificationListLayoutManager;
 
     private static final String planets[] = new String[] {"Sun", "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"};
@@ -37,9 +36,8 @@ public class NotificationListFragment extends Fragment {
 
         mNotificationListLayoutManager = new LinearLayoutManager(getActivity());
         mNotificationListView.setLayoutManager(mNotificationListLayoutManager);
-
         // specify an adapter (see also next example)
-        mNotificationListAdapter = new NotificationListAdapter(new ArrayList<String>(Arrays.asList(planets)));
+        mNotificationListAdapter = FirebaseHelper.getGroupManager().inboxAdapter;
         mNotificationListView.setAdapter(mNotificationListAdapter);
 
         // use this setting to improve performance if you know that changes
@@ -50,8 +48,10 @@ public class NotificationListFragment extends Fragment {
 
     //Remove a notification
     public void removeNotification(View v) {
+        //TODO make this work through firebase and it could just update automatically
         int position = mNotificationListView.getChildAdapterPosition((RelativeLayout) v.getParent().getParent().getParent());
-        mNotificationListAdapter.mDataSet.remove(position);
+        mNotificationListAdapter.mDataSet.remove(mNotificationListAdapter.keys.get(position));
+        mNotificationListAdapter.keys.remove(position);
         mNotificationListAdapter.notifyItemRemoved(position);
         mNotificationListAdapter.notifyItemRangeChanged(position, mNotificationListAdapter.mDataSet.size());
     }

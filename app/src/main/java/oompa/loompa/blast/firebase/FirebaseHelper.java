@@ -136,7 +136,7 @@ public class FirebaseHelper {
                 user.getSubscriptions().add(dataSnapshot.getKey());
                 FirebaseGroup.accessGroup(dataSnapshot.getKey()).registerGroupListener(new GroupListener() {
                     @Override
-                    public void messageChange(Group group, List<Message> msgs) {
+                    public void messageChange(Group group, Map<String,Message> msgs) {
 
                     }
 
