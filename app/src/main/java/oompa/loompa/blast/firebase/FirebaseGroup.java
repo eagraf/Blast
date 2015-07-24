@@ -108,6 +108,7 @@ public class FirebaseGroup implements Group {
                     Message msg = datum.getValue(Message.class);
                     Log.i("Group","subject: "+msg.getSubject()+"\nbody: "+msg.getBody());
                     messageList.put(datum.getKey(), msg);
+                    listener.messageAdded(FirebaseGroup.this, msg);
                 }
                 messages = messageList;
                 listener.messageChange(FirebaseGroup.this, messageList);

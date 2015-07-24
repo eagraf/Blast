@@ -1,11 +1,7 @@
 package oompa.loompa.blast;
 
-/**
- * Created by Da-Jin on 7/16/2015.
- */
-
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.AsyncTask;
@@ -25,7 +21,10 @@ import java.io.IOException;
 
 import oompa.loompa.blast.firebase.FirebaseHelper;
 
-public class GoogleOAuthActivity extends Activity implements
+/**
+ * Created by Ethan on 7/23/2015.
+ */
+public class GoogleOAuth implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
@@ -46,11 +45,12 @@ public class GoogleOAuthActivity extends Activity implements
      * sign-in. */
     private ConnectionResult mGoogleConnectionResult;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private Context context;
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+    public GoogleOAuth(Context context) {
+        this.context = context;
+
+        mGoogleApiClient = new GoogleApiClient.Builder(context)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API)
@@ -74,17 +74,19 @@ public class GoogleOAuthActivity extends Activity implements
 
     /* A helper method to resolve the current ConnectionResult error. */
     private void resolveSignInError() {
-        if (mGoogleConnectionResult.hasResolution()) {
+        /*if (mGoogleConnectionResult.hasResolution()) {
+            mGoogleIntentInProgress = true;
+
             try {
                 mGoogleIntentInProgress = true;
-                mGoogleConnectionResult.startResolutionForResult(this, RC_GOOGLE_LOGIN);
+                mGoogleConnectionResult.startResolutionForResult(context, RC_GOOGLE_LOGIN);
             } catch (IntentSender.SendIntentException e) {
                 // The intent was canceled before it was sent.  Return to the default
                 // state and attempt to connect to get an updated ConnectionResult.
                 mGoogleIntentInProgress = false;
                 mGoogleApiClient.connect();
             }
-        }
+        }*/
     }
 
     private void getGoogleOAuthTokenAndLogin() {
@@ -98,19 +100,19 @@ public class GoogleOAuthActivity extends Activity implements
 
                 try {
                     String scope = String.format("oauth2:%s", Scopes.PLUS_LOGIN);
-                    token = GoogleAuthUtil.getToken(GoogleOAuthActivity.this, Plus.AccountApi.getAccountName(mGoogleApiClient), scope);
+                    token = GoogleAuthUtil.getToken(context, Plus.AccountApi.getAccountName(mGoogleApiClient), scope);
                 } catch (IOException transientEx) {
                     /* Network or server error */
                     Log.e(TAG, "Error authenticating with Google: " + transientEx);
                     errorMessage = "Network error: " + transientEx.getMessage();
                 } catch (UserRecoverableAuthException e) {
                     Log.w(TAG, "Recoverable Google OAuth error: " + e.toString());
-                    /* We probably need to ask for permissions, so start the intent if there is none pending */
+                    /* We probably need to ask for permissions, so start the intent if there is none pending
                     if (!mGoogleIntentInProgress) {
                         mGoogleIntentInProgress = true;
                         Intent recover = e.getIntent();
                         startActivityForResult(recover, RC_GOOGLE_LOGIN);
-                    }
+                    }*/
                 } catch (GoogleAuthException authEx) {
                     /* The call is not ever expected to succeed assuming you have already verified that
                      * Google Play services is installed. */
@@ -126,7 +128,7 @@ public class GoogleOAuthActivity extends Activity implements
                 mGoogleLoginClicked = false;
                 if (token != null) {
                     /* Successfully got OAuth token, now login with Google */
-                    FirebaseHelper.authWithToken("google",token,GoogleOAuthActivity.this.getApplication());
+                    FirebaseHelper.authWithToken("google", token, context);
                 } else if (errorMessage != null) {
                     showErrorDialog(errorMessage);
                 }
@@ -136,7 +138,7 @@ public class GoogleOAuthActivity extends Activity implements
     }
 
     private void showErrorDialog(String message) {
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(context)
                 .setTitle("Error")
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, null)
@@ -148,6 +150,7 @@ public class GoogleOAuthActivity extends Activity implements
     public void onConnected(final Bundle bundle) {
         /* Connected with Google API, use this to authenticate with Firebase */
         getGoogleOAuthTokenAndLogin();
+        ((BlastService) context).onAuthorized();
     }
 
     @Override
@@ -171,16 +174,4 @@ public class GoogleOAuthActivity extends Activity implements
         // ignore
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_OK) {
-            mGoogleLoginClicked = false;
-        }
-
-        mGoogleIntentInProgress = false;
-
-        if (!mGoogleApiClient.isConnecting()) {
-            mGoogleApiClient.connect();
-        }
-    }
 }

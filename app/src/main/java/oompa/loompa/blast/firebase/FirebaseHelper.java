@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import oompa.loompa.blast.BlastApplication;
 import oompa.loompa.blast.Group;
 import oompa.loompa.blast.GroupListener;
 import oompa.loompa.blast.GroupManager;
@@ -34,7 +35,6 @@ public class FirebaseHelper {
     private static Boolean connected = false;
     private static FirebaseGoogleUser user;
     private static String userDir;
-    private static GroupManager groupManager;
 
     private static class AuthResultHandler implements Firebase.AuthResultHandler {
         Context context;
@@ -55,18 +55,19 @@ public class FirebaseHelper {
             mFirebaseRef.child(userDir).updateChildren(children);
 
 
-            groupManager.onAuthorization();
-            context.startActivity(new Intent(context, MainActivity.class));
+            ((BlastApplication) context).onAuthenticated();
+            context.startActivity(new Intent(context, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
 
         @Override
         public void onAuthenticationError(FirebaseError firebaseError) {
+            /*
             new AlertDialog.Builder(context)
                     .setTitle("Error")
                     .setMessage(firebaseError.toString())
                     .setPositiveButton(android.R.string.ok, null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
+                    .show();*/
         }
     }
 
@@ -84,8 +85,6 @@ public class FirebaseHelper {
                 // No-op
             }
         });
-
-        groupManager = new GroupManager(context);
     }
     public static void onStop(){
         mFirebaseRef.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
@@ -94,9 +93,6 @@ public class FirebaseHelper {
         return connected;
     }
 
-    public static GroupManager getGroupManager(){
-        return groupManager;
-    }
     //TODO NOT sure if synchronize is needed.
     protected static Firebase getFirebaseRef(){
         if(mFirebaseRef==null){
@@ -128,7 +124,7 @@ public class FirebaseHelper {
         return userDir;
     }
     public static void registerSubscriptionListener(final SubscriptionListener listener){
-        Log.i("Helerp", getUserDir());
+        //Log.i("Helerp", getUserDir());
         mFirebaseRef.child(getUserDir()+"/subscriptions/").addChildEventListener(new ChildEventListener() {
 
             @Override
@@ -144,6 +140,11 @@ public class FirebaseHelper {
                     public void metaDataChange(Group group, Group.Metadata meta) {
                         //Only add the sub when metadata is in so that ui can display it's name properly
                         listener.subAdded(group);
+                    }
+
+                    @Override
+                    public void messageAdded(Group group, Message message) {
+
                     }
                 });
             }

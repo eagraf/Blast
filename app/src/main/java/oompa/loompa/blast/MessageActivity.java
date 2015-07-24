@@ -55,12 +55,16 @@ public class MessageActivity extends AppCompatActivity {
         });
 
         String name = intent.getStringExtra(MainActivity.MESSAGE_VIEW_GROUP_NAME);
-        GroupManager groupManager = FirebaseHelper.getGroupManager();
+        GroupManager groupManager = ((BlastApplication) getApplication()).getGroupManager();
         group = null;
         for(int i = 0; i < groupManager.groups.size(); i++) {
             if(name.equals(((FirebaseGroup) groupManager.groups.get(i)).getUID())) {
                 group = groupManager.groups.get(i);
             }
+        }
+
+        if(((FirebaseGroup) group).getMetadata().getOwnerUID().equals(FirebaseHelper.getCurrentUserInfo().getUID())) {
+            findViewById(R.id.post_view).setVisibility(View.VISIBLE);
         }
 
         mMessageListView = (RecyclerView) findViewById(R.id.message_list_view);

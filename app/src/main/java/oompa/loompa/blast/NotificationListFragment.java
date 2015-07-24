@@ -37,7 +37,7 @@ public class NotificationListFragment extends Fragment {
         mNotificationListLayoutManager = new LinearLayoutManager(getActivity());
         mNotificationListView.setLayoutManager(mNotificationListLayoutManager);
         // specify an adapter (see also next example)
-        mNotificationListAdapter = FirebaseHelper.getGroupManager().inboxAdapter;
+        mNotificationListAdapter = ((BlastApplication) getActivity().getApplication()).getGroupManager().inboxAdapter;
         mNotificationListView.setAdapter(mNotificationListAdapter);
 
         // use this setting to improve performance if you know that changes

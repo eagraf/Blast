@@ -28,8 +28,9 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     public void onAuthorization() {
         groups = new ArrayList<>();
 
-        this.inboxAdapter = new MultiGroupMessageListAdapter();
         FirebaseHelper.registerSubscriptionListener(this);
+
+        this.inboxAdapter = new MultiGroupMessageListAdapter();
         this.groupAdapter = new GroupListAdapter(this);
         this.messageAdapter = new MessageListAdapter();
 
@@ -42,6 +43,11 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
 
     //Remove a group.
     public void removeGroup(Group group) {
+
+    }
+
+    @Override
+    public void messageAdded(Group group, Message message) {
 
     }
 

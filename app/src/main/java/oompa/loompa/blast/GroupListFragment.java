@@ -31,7 +31,7 @@ public class GroupListFragment extends Fragment {
         view = inflater.inflate(R.layout.group_list_fragment, container, false);
 
         //group manager
-        groupManager = FirebaseHelper.getGroupManager();
+        groupManager = ((BlastApplication) getActivity().getApplication()).getGroupManager();
 
         mGroupListView = (RecyclerView) view.findViewById(R.id.group_list_view);
 
