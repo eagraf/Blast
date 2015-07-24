@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="oompa.loompa.blast" >
 
-    <uses-sdk android:minSdkVersion="11"
+    <uses-sdk android:minSdkVersion="14"
         android:maxSdkVersion="22"
         android:targetSdkVersion="21"/>
     <uses-permission android:name="android.permission.INTERNET" />

@@ -21,10 +21,7 @@ public class MultiGroupMessageListAdapter extends MessageListAdapter {
         ViewHolder vh = new ViewHolder((RelativeLayout) v);
         return vh;
     }
-    @Override
-    public void setGroup(Group group){
-        return;
-    }
+
     @Override
     public void updateGroup(Group group){
         mDataSet.putAll(group.getMessages());

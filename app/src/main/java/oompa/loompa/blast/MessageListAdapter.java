@@ -67,13 +67,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         return mDataSet.size();
     }
 
-    public void setGroup(Group group){
+    public void setGroup(Group group) {
         this.group = group;
-        updateGroup(group);
     }
+
     public void updateGroup(Group group) {
         if(this.group==null || !group.getUID().equals(this.group.getUID())){
             //Exit if we aren't listening to group.
+            System.out.println("YOHOHO");
             return;
         }
         mDataSet = (TreeMap<String, Message>) group.getMessages();

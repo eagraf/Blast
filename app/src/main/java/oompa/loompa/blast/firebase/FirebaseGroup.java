@@ -42,6 +42,7 @@ public class FirebaseGroup implements Group {
 
                 }
             });*/
+            System.out.println("UUIIDD: " + UID);
             FirebaseMetadata meta = new FirebaseMetadata(UID,groupName,ownerUID,isPublic);
             Group group = new FirebaseGroup(UID,meta);
             group.subscribe();

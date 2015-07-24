@@ -20,8 +20,6 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     public GroupListAdapter groupAdapter;
     public FindGroupsListAdapter findGroupsAdapater;
 
-    public MessageListAdapter messageAdapter;
-
     public Context context;
     public MultiGroupMessageListAdapter inboxAdapter;
 
@@ -35,7 +33,6 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
         FirebaseHelper.registerAllGroupsMetaListener(this);
         this.groupAdapter = new GroupListAdapter(this);
         this.findGroupsAdapater = new FindGroupsListAdapter(this);
-        this.messageAdapter = new MessageListAdapter();
         this.inboxAdapter = new MultiGroupMessageListAdapter();
 
 
@@ -54,7 +51,6 @@ public class GroupManager implements GroupListener, FirebaseHelper.SubscriptionL
     @Override
     public void messageChange(Group group, Map<String,Message> msgs) {
         Log.i("Manager","Message Change");
-        messageAdapter.updateGroup(group);
         inboxAdapter.updateGroup(group);
     }
 

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FindGroupsListFragment findGroupsListFragment;
 
     public final static String MESSAGE_VIEW_TITLE = "oompa.loompa.blast.MESSAGE_VIEW_TITLE";
-    public final static String MESSAGE_VIEW_GROUP_NAME = "oompa.loompa.blast.MESSAGE_VIEW_GROUP_NAME";
+    public final static String MESSAGE_VIEW_GROUP_UID = "oompa.loompa.blast.MESSAGE_VIEW_GROUP_NAME";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +139,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void openMessageView(View v) {
         Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra(MESSAGE_VIEW_TITLE, ((TextView) v.findViewById(R.id.firstLine)).getText().toString());
-        intent.putExtra(MESSAGE_VIEW_GROUP_NAME, ((TextView) v.findViewById(R.id.uid)).getText().toString());
+        intent.putExtra(MESSAGE_VIEW_GROUP_UID, ((TextView) v.findViewById(R.id.uid)).getText().toString());
+        System.out.println("UID: " + ((TextView) v.findViewById(R.id.uid)).getText().toString());
         this.startActivity(intent);
     }
 
