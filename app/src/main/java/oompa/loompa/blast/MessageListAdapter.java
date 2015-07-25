@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
 
+import oompa.loompa.blast.firebase.FirebaseHelper;
 import oompa.loompa.blast.firebase.Message;
 
 /**
@@ -29,10 +31,12 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         // each data item is just a string in this case
         public TextView mFirstLine;
         public TextView mSecondLine;
+        public ImageView mProfileImage;
         public ViewHolder(RelativeLayout v) {
             super(v);
             mFirstLine = (TextView) v.findViewById(R.id.firstLine);
             mSecondLine = (TextView) v.findViewById(R.id.secondLine);
+            mProfileImage = (ImageView) v.findViewById(R.id.icon);
         }
     }
 
@@ -59,6 +63,16 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         // - replace the contents of the view with that element
         viewHolder.mSecondLine.setText(mDataSet.get(keys.get(i)).getBody());
         viewHolder.mFirstLine.setText(mDataSet.get(keys.get(i)).getSubject());
+
+        final ViewHolder vh = viewHolder;
+        FirebaseHelper.getOtherUserInfo(group.getMetadata().getOwnerUID(), new FirebaseHelper.UserInfoCallback() {
+            @Override
+            public void infoArrived(User user) {
+                vh.mProfileImage.setTag(user.getProfileImageURL());
+                ImageView params[] = { vh.mProfileImage };
+                new ImageHelper().execute(params);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -77,6 +91,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             System.out.println("YOHOHO");
             return;
         }
+        this.group = group;
         mDataSet = (TreeMap<String, Message>) group.getMessages();
         keys= new LinkedList<>(Arrays.asList(mDataSet.keySet().toArray()));
         notifyDataSetChanged();

@@ -24,6 +24,7 @@ public class MultiGroupMessageListAdapter extends MessageListAdapter {
 
     @Override
     public void updateGroup(Group group){
+        this.group = group;
         mDataSet.putAll(group.getMessages());
         keys= new LinkedList<>(Arrays.asList(mDataSet.keySet().toArray()));
         notifyDataSetChanged();
